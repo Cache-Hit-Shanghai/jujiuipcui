@@ -1,7 +1,7 @@
 'use client';
 
 import { Text, Box, Nav, Menu, Select, Sidebar, Accordion, AccordionPanel, List, CheckBox, Button } from 'grommet';
-import { CloudComputer, User, Qr, Logout, SettingsOption, Video, Webcam } from 'grommet-icons';
+import { CloudComputer, User, Add, Logout, SettingsOption, Video, Webcam } from 'grommet-icons';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -36,18 +36,18 @@ function CameraList({ isNew, data, onClickCameraSetting }) {
 export default function Page() {
   return (
     <Box fill>
-      <Nav direction='row' background='background-front' pad='small' justify='between'>
+      <Nav direction='row' background='background-contrast' pad='small' justify='between'>
         <Box direction='row' align='center' gap='small'>
           <CloudComputer size='large' />
           <Text size='large'>雎鸠云视觉SaaS平台</Text>
         </Box>
         <Select options={['简体中文', 'English']} value='简体中文' />
         <Menu label={<User />} items={[
-          {label: '添加设备', icon: <Qr />, gap: 'small', onClick: () => setShowQRCode(!showQRCode)},
+          {label: '添加设备', icon: <Add />, gap: 'small', onClick: () => setShowQRCode(!showQRCode)},
           {label: '退出登录', icon: <Logout />, gap: 'small'},
         ]} />
       </Nav>
-      <Box direction='row' flex={{ grow: 1, shrink: 1 }} background='background-contrast'>
+      <Box direction='row' flex={{ grow: 1, shrink: 1 }} background='background-front'>
         <Sidebar flex={false} width='medium'>
           <Accordion>
             <AccordionPanel label='IPC Proxy 1'>
