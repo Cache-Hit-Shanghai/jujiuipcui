@@ -39,7 +39,7 @@ export default function Page() {
       <Nav direction='row' background='background-contrast' pad='small' justify='between'>
         <Box direction='row' align='center' gap='small'>
           <CloudComputer size='large' />
-          <Text size='large'>雎鸠云视觉SaaS平台</Text>
+          <Text size='xlarge' weight='bold'>雎鸠云视觉SaaS平台</Text>
         </Box>
         <Select options={['简体中文', 'English']} value='简体中文' />
         <Menu label={<User />} items={[
