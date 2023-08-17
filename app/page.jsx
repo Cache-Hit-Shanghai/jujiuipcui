@@ -16,9 +16,9 @@ import {
 } from '../components/Components';
 
 const data0 = [
-  { label: '客厅' }, 
-  { label: '走廊' }, 
-  { label: '厨房', disabled: true }];
+  { label: '云探1' }, 
+  { label: '金乌1' }, 
+  { label: '云探2', disabled: true }];
 
 export function CameraCheckBox({ disabled,  checked, label }) {
   return (
@@ -48,8 +48,8 @@ export function VideoPlayer({ ...prop }) {
         <Video controls={false} />
         <Stack fill>
           <Box fill justify='between'>
-            <Box pad='small' direction='row' justify='end'>
-              <IconButton key={5} content='关闭' icon={<Close />} />
+            <Box pad='small' direction='row' justify='center'>
+              <Text>云探1</Text>
             </Box>
             <Box direction='row' justify='center' gap='small'>
               <ScreenCopyControl showTitle={false} />
@@ -85,10 +85,10 @@ export default function Page() {
         <Sidebar flex={false} width='medium'>
           <CameraList isNew data={data0} onClickCameraSetting={() => {}} />
         </Sidebar>
-        <Main pad='small' background='background-front'>
-          <Grid fill columns='640px' gap='small' align='center' justify='center' style={{ gridAutoFlow: 'row dense', gridAutoRows: '480px' }}>
-            {Array.from({ length: 20 }, (_, index) => index).map(item => <VideoPlayer key={item} />)}
-          </Grid>
+        <Main background='background-front'>
+            <Grid fill columns='640px' align='center' justify='center' style={{ gridAutoFlow: 'row dense', gridAutoRows: '480px' }}>
+              {Array.from({ length: 20 }, (_, index) => index).map(item => <Box fill pad='small'><VideoPlayer key={item} /></Box>)}
+            </Grid>
         </Main>
       </Box>
     </Box>
