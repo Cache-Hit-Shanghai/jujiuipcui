@@ -1,0 +1,3 @@
+[submodule "jujiuuicomponents"]
+	path = jujiuuicomponents
+	url = git@github.com:Cache-Hit-Shanghai/jujiuuicomponents.git

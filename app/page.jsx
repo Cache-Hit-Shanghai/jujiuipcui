@@ -13,7 +13,7 @@ import {
 	PanLayer,
 	ResolutionControl,
 	ZoomControl,
-} from '../components/Components';
+} from '@/jujiuuicomponents/Components';
 
 const data0 = [
   { label: '云探1' }, 
@@ -33,12 +33,6 @@ function CameraList({ isNew, data, onClickCameraSetting }) {
     </List>
   );
 }
-
-function IconButton({ content, icon, ...prop }) {
-  return <Button plain tip={content} icon={icon} {...prop} />;
-}
-
-const BigViewPort = { gridColumn: 'span 2', gridRow: 'span 2' };
 
 export function VideoPlayer({ ...prop }) {
   const ref = useRef();
