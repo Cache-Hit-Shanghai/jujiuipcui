@@ -16,11 +16,11 @@ import {
 const data0 = [
   { label: '云探1' }, 
   { label: '金乌1' }, 
-  { label: '云探2', disabled: true }];
+  { label: '云探2' }];
 
-export function CameraCheckBox({ disabled,  checked, label }) {
+export function CameraCheckBox({ checked, label }) {
   return (
-    <CheckBox disabled={disabled} checked={checked} label={<Button plain label={label} icon={<Webcam />} />} />
+    <CheckBox checked={checked} label={<Button plain label={label} icon={<Webcam />} />} />
   );
 }
 
