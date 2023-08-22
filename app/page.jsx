@@ -2,7 +2,6 @@
 
 import { Text, Box, Nav, Menu, Select, Sidebar, List, CheckBox, Button, Main, Grid, Video, Stack } from 'grommet';
 import { CloudComputer, User, Add, Logout, SettingsOption, Webcam, Expand, Camera, ZoomIn, VolumeMute, Microphone, Close, Shift } from 'grommet-icons';
-import Link from 'next/link';
 import { useRef } from 'react';
 import {
 	ScreenCopyControl,
@@ -79,9 +78,9 @@ export default function Page() {
           <CameraList isNew data={data0} onClickCameraSetting={() => {}} />
         </Sidebar>
         <Main background='background-front'>
-            <Grid fill columns='640px' align='center' justify='center' style={{ gridAutoFlow: 'row dense', gridAutoRows: '480px' }}>
-              {Array.from({ length: 20 }, (_, index) => index).map(item => <Box fill pad='small'><VideoPlayer key={item} /></Box>)}
-            </Grid>
+          <Grid fill columns='640px' align='center' justify='center' style={{ gridAutoFlow: 'row dense', gridAutoRows: '480px' }}>
+            {Array.from({ length: 20 }, (_, index) => index).map(item => <Box fill pad='small'><VideoPlayer key={item} /></Box>)}
+          </Grid>
         </Main>
       </Box>
     </Box>
