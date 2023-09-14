@@ -1,0 +1,10 @@
+{
+  "Index": {
+    "在线": "online",
+    "离线": "offline",
+    "分享中": "Sharing",
+    "来自分享": "From Friends",
+    "云存储已过期": "Cloud storage expires",
+    "云存储即将过期": "Cloud storage is expiring"
+  }
+}
