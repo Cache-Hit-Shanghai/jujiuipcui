@@ -1,5 +1,5 @@
 import { Grommet, grommet } from 'grommet';
-import StyledComponentsRegistry from '@/jujiuuicomponents/registry';
+import StyledComponentsRegistry from '@/jujiuuicomponents/layout/registry';
 
 export default function RootLayout({ children }) {
   return (
