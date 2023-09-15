@@ -4,6 +4,8 @@ import { Heading, Box, Tabs, Tab, Avatar, Main } from 'grommet';
 import { User } from 'grommet-icons';
 import { PCNav, PCSideBar } from '@/app/components';
 import { ChangeAvatar, ChangeNickname, ChangePassword } from '@/jujiuuicomponents/application/settings/account';
+import { ChangeNotification, ChangeAIAlarm } from '@/jujiuuicomponents/application/settings/notification';
+import { ChangeUI } from '@/jujiuuicomponents/application/settings/ui';
 
 
 export default function Page() {
@@ -32,8 +34,26 @@ export default function Page() {
                 </Box>
               </Box>
             </Tab>
-            <Tab title='通知设置'></Tab>
-            <Tab title='界面设置'></Tab>
+            <Tab title='通知设置'>
+              <Box wrap direction='row' gap='small'>
+                <Box border width='medium' gap='small' pad='medium' round='small'>
+                  <Heading level={3} alignSelf='center' margin='none'>修改消息通知</Heading>
+                  <ChangeNotification />
+                </Box>
+                <Box border width='medium' gap='small' pad='medium' round='small'>
+                  <Heading level={3} alignSelf='center' margin='none'>修改AI报警事件类型</Heading>
+                  <ChangeAIAlarm />
+                </Box>
+              </Box>
+            </Tab>
+            <Tab title='界面设置'>
+              <Box wrap direction='row' gap='small'>
+                <Box border width='medium' gap='small' pad='medium' round='small'>
+                  <Heading level={3} alignSelf='center' margin='none'>修改界面</Heading>
+                  <ChangeUI />
+                </Box>
+              </Box>
+            </Tab>
           </Tabs>
         </Main>
       </Box>
