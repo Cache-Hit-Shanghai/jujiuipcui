@@ -27,6 +27,7 @@ export default function Page() {
                   <ChangeNickname />
                 </Box>
                 <Box border width='medium' gap='small' pad='medium' round='small'>
+                  <Heading level={3} alignSelf='center' margin='none'>修改密码</Heading>
                   <ChangePassword />
                 </Box>
               </Box>
