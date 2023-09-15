@@ -1,7 +1,6 @@
 'use client';
 
-import { Text, Box, Nav, Menu, Select, Sidebar, Accordion, AccordionPanel, Main, Grid, Video, Stack } from 'grommet';
-import { CloudComputer, User, Add, Logout } from 'grommet-icons';
+import { Text, Box, Sidebar, Accordion, AccordionPanel, Main, Grid, Video, Stack } from 'grommet';
 import { useRef } from 'react';
 import {
   IpcCardSelectable,
@@ -14,6 +13,7 @@ import {
 	ZoomControl,
 } from '@/jujiuuicomponents/Components';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiuuicomponents/JuJiuTags';
+import { PCNav, PCSideBar } from '@/app/components';
 
 
 function CameraList() {
@@ -65,25 +65,16 @@ export function VideoPlayer({ ...prop }) {
 
 export default function Page() {
   return (
-    <Box fill>
-      <Nav direction='row' background='background-contrast' pad='small' justify='between'>
-        <Box direction='row' align='center' gap='small'>
-          <CloudComputer size='large' />
-          <Text size='xlarge' weight='bold'>雎鸠云视觉SaaS平台</Text>
-        </Box>
-        <Select options={['简体中文', 'English']} value='简体中文' />
-        <Menu label={<User />} items={[
-          {label: '账号设置', icon: <Add />, gap: 'small', onClick: () => setShowQRCode(!showQRCode)},
-          {label: '退出登录', icon: <Logout />, gap: 'small'},
-        ]} />
-      </Nav>
-      <Box direction='row' flex={{ grow: 1, shrink: 1 }}>
-        <Sidebar flex={false} width='medium' overflow='auto' pad='none'>
+    <Box fill gap='small' background='background-contrast'>
+      <PCNav />
+      <Box direction='row' flex={{ grow: 1, shrink: 1 }} gap='small'>
+        <PCSideBar />
+        <Sidebar flex={false} width='medium' overflow='auto' pad='none' background='background'>
           <CameraList />
         </Sidebar>
-        <Main background='background-front'>
-          <Grid fill columns='640px' align='center' justify='center' style={{ gridAutoFlow: 'row dense', gridAutoRows: '480px' }}>
-            {Array.from({ length: 20 }, (_, index) => index).map(item => <Box fill pad='small'><VideoPlayer key={item} /></Box>)}
+        <Main>
+          <Grid fill columns='640px' align='center' justify='center' style={{ gridAutoFlow: 'row dense', gridAutoRows: '480px', gap: '12px' }}>
+            {Array.from({ length: 20 }, (_, index) => index).map(item => <VideoPlayer key={item} />)}
           </Grid>
         </Main>
       </Box>
