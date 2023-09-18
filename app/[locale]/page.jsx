@@ -84,7 +84,7 @@ export default function Page() {
       { openAddDevice && (
         <Layer onClickOutside={() => setOpenAddDevice(false)} position='top'>
           {stage === 0 && (
-            <Box width='medium' pad='medium' gap='medium'>
+            <Box border width='medium' pad='medium' gap='medium'>
               <Heading level={3} alignSelf='center' margin='none'>添加设备</Heading>
               <WiFiBinding />
               <Box direction='row' justify='end'>
@@ -93,7 +93,7 @@ export default function Page() {
             </Box>
           )}
           {stage === 1 && (
-            <Box width='medium' pad='medium' gap='medium'>
+            <Box border width='medium' pad='medium' gap='medium'>
               <Heading level={3} alignSelf='center' margin='none'>添加设备</Heading>
               <DeviceBinding />
               <Box direction='row'>
