@@ -1,9 +1,9 @@
 import { Sidebar, Nav, Select, Box, Menu, Text } from 'grommet';
-import { User, Logout, Webcam, System, CloudComputer } from 'grommet-icons';
+import { Add, User, Logout, Webcam, System, CloudComputer } from 'grommet-icons';
 import { ButtonLink } from '@/jujiuuicomponents/core/core_ui';
 
 
-export function PCNav() {
+export function PCNav({ onAddDevice }) {
   return (
     <Nav direction='row' background='background' pad='small' justify='between' flex={false}>
       <Box direction='row' align='center' gap='small'>
@@ -15,6 +15,7 @@ export function PCNav() {
         label={<User />}
         dropProps={{ align: { top: 'bottom', left: 'left' } }}
         items={[
+          {label: '添加设备', icon: <Add />, gap: 'small', onClick: onAddDevice},
           {label: '退出登录', icon: <Logout />, gap: 'small'},
         ]}
       />

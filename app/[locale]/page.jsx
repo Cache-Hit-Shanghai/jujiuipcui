@@ -1,7 +1,7 @@
 'use client';
 
-import { Text, Box, Sidebar, Accordion, AccordionPanel, Main, Grid, Video, Stack } from 'grommet';
-import { useRef } from 'react';
+import { Text, Box, Sidebar, Accordion, AccordionPanel, Main, Grid, Video, Stack, Heading, Layer, Button } from 'grommet';
+import { useRef, useState } from 'react';
 import {
   IpcCardSelectable,
 	ScreenCopyControl,
@@ -14,6 +14,7 @@ import {
 } from '@/jujiuuicomponents/Components';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiuuicomponents/JuJiuTags';
 import { PCNav, PCSideBar } from '@/app/components';
+import { WiFiBinding, DeviceBinding } from '@/jujiuuicomponents/application/device/binding';
 
 
 function CameraList() {
@@ -64,9 +65,11 @@ export function VideoPlayer({ ...prop }) {
 }
 
 export default function Page() {
+  const [ openAddDevice, setOpenAddDevice ] = useState(false);
+  const [ stage, setStage ] = useState(0);
   return (
     <Box fill gap='small' background='background-contrast'>
-      <PCNav />
+      <PCNav onAddDevice={() => setOpenAddDevice(true)} />
       <Box direction='row' flex={{ grow: 1, shrink: 1 }} gap='small'>
         <PCSideBar />
         <Sidebar flex={false} width='medium' overflow='auto' pad='none' background='background'>
@@ -78,6 +81,28 @@ export default function Page() {
           </Grid>
         </Main>
       </Box>
+      { openAddDevice && (
+        <Layer onClickOutside={() => setOpenAddDevice(false)} position='top'>
+          {stage === 0 && (
+            <Box width='medium' pad='medium' gap='medium'>
+              <Heading level={3} alignSelf='center' margin='none'>添加设备</Heading>
+              <WiFiBinding />
+              <Box direction='row' justify='end'>
+                <Button label='下一步' onClick={() => setStage(1)} />
+              </Box>
+            </Box>
+          )}
+          {stage === 1 && (
+            <Box width='medium' pad='medium' gap='medium'>
+              <Heading level={3} alignSelf='center' margin='none'>添加设备</Heading>
+              <DeviceBinding />
+              <Box direction='row'>
+                <Button label='上一步' onClick={() => setStage(0)} />
+              </Box>
+            </Box>
+          )}
+        </Layer>
+      ) }
     </Box>
   );
 }
