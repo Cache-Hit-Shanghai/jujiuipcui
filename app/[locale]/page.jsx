@@ -31,7 +31,7 @@ import {
 import {
   JuJiuTagFromShared,
   JuJiuTagSharing,
-} from "@/jujiu-ui-components/JuJiuTags";
+} from "@/jujiu-ui-components/jujiu-tags";
 import { PCNav, PCSideBar } from "@/app/components";
 import {
   WiFiBinding,

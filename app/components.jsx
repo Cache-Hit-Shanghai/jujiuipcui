@@ -8,7 +8,7 @@ import {
   CloudComputer,
 } from "grommet-icons";
 import { Group } from "@styled-icons/fluentui-system-regular/Group";
-import { ButtonLink } from "@/jujiu-ui-components/core/core_ui";
+import { ButtonLink } from "@/jujiu-ui-components/core/core-ui";
 
 export function PCNav({ onAddDevice, onDeviceGroup }) {
   return (
