@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import GrommetRoot from "@/jujiuuicomponents/layout/grommet";
+import GrommetRoot from "@/jujiu-ui-components/layout/grommet";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "cn" }];
