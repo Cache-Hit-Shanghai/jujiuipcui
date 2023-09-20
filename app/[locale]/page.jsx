@@ -209,8 +209,10 @@ export default function Page() {
 			)}
 			{openDeviceSettings && (
 				<Layer full='vertical' onClickOutside={() => setOpenDeviceSettings(false)} position='right'>
-					<Box fill pad='small'>
-						abcd
+					<Box width='medium' pad='small' gap='small'>
+						<Heading level={3} alignSelf='center'>
+							设备设置 - 客厅
+						</Heading>
 					</Box>
 				</Layer>
 			)}
