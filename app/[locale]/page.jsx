@@ -38,7 +38,7 @@ import {
   DeviceBinding,
 } from "@/jujiu-ui-components/application/device/binding";
 
-function CameraList() {
+function CameraList({ onSettings, onInformation }) {
   return (
     <Accordion>
       <AccordionPanel label={<Text margin="small">默认分组</Text>}>
@@ -51,6 +51,8 @@ function CameraList() {
                 <JuJiuTagSharing />
               </Box>
             }
+            onSettings={onSettings}
+            onInformation={onInformation}
             imgurl="https://ts1.cn.mm.bing.net/th/id/R-C.f54c83f04442cec528a250d251251ce6?rik=JE7BoZk5xK4iEg&riu=http%3a%2f%2fpic4.bbzhi.com%2ffengjingbizhi%2fgaoqingxifengjingzhuomianbizhixiazai%2fgaoqingxifengjingzhuomianbizhixiazai_366146_18.jpg&ehk=YvUnl11nBp%2fGJssQUbYqkXLo7fchkD%2fEQ8BGpW2Urjs%3d&risl=&pid=ImgRaw&r=0"
           />
         </Box>
@@ -60,21 +62,29 @@ function CameraList() {
           <IpcCardSelectable
             key={1}
             label="办3"
+            onSettings={onSettings}
+            onInformation={onInformation}
             imgurl="https://ts1.cn.mm.bing.net/th/id/R-C.4894a961ab87e3459babae4ef8a2f4fa?rik=1P7ZI7Evnz4Pqg&riu=http%3a%2f%2fpic.zsucai.com%2ffiles%2f2013%2f0830%2fxiaguang2.jpg&ehk=Ok%2fjrv35R0L218oT%2flliRL8DJc52pARVnWU%2bXOpUwq4%3d&risl=&pid=ImgRaw&r=0"
           />
           <IpcCardSelectable
             key={2}
             label="办5"
+            onSettings={onSettings}
+            onInformation={onInformation}
             imgurl="https://ts1.cn.mm.bing.net/th/id/R-C.f54c83f04442cec528a250d251251ce6?rik=JE7BoZk5xK4iEg&riu=http%3a%2f%2fpic4.bbzhi.com%2ffengjingbizhi%2fgaoqingxifengjingzhuomianbizhixiazai%2fgaoqingxifengjingzhuomianbizhixiazai_366146_18.jpg&ehk=YvUnl11nBp%2fGJssQUbYqkXLo7fchkD%2fEQ8BGpW2Urjs%3d&risl=&pid=ImgRaw&r=0"
           />
           <IpcCardSelectable
             key={3}
             label="办7"
+            onSettings={onSettings}
+            onInformation={onInformation}
             imgurl="https://ts1.cn.mm.bing.net/th/id/R-C.3edbd350d03c25ed988236c50d0733e6?rik=txi3%2f%2b%2fVYUJofg&riu=http%3a%2f%2fpic.zsucai.com%2ffiles%2f2013%2f0802%2fwmdqfj4.jpg&ehk=TY9%2f90VQn6m3NYCoiPX2UyRYQIT7dkGJtTJli1W7pfo%3d&risl=&pid=ImgRaw&r=0"
           />
           <IpcCardSelectable
             key={4}
             label="办9"
+            onSettings={onSettings}
+            onInformation={onInformation}
             imgurl="https://ts1.cn.mm.bing.net/th/id/R-C.0c8bf36e099654aadaf5f127ef1a3f1b?rik=uHrB%2blGez03%2fAA&riu=http%3a%2f%2fi3.img.969g.com%2fdown%2fimgx2014%2f10%2f24%2f289_102445_a1cff.jpg&ehk=EeF%2fioqRM6NfQqkCgXw%2bwLvO1%2fxZgeZ2pof7ALNLGsg%3d&risl=&pid=ImgRaw&r=0"
           />
         </Box>
@@ -113,6 +123,8 @@ export function VideoPlayer({ ...prop }) {
 export default function Page() {
   const [openAddDevice, setOpenAddDevice] = useState(false);
   const [openDeviceGroup, setOpenDeviceGroup] = useState(false);
+  const [openDeviceSettings, setOpenDeviceSettings] = useState(false);
+  const [openDeviceInformation, setOpenDeviceInformation] = useState(false);
   const [stage, setStage] = useState(0);
   return (
     <Box fill gap="small" background="background-contrast">
@@ -129,7 +141,10 @@ export default function Page() {
           pad="none"
           background="background"
         >
-          <CameraList />
+          <CameraList
+            onSettings={() => setOpenDeviceSettings(true)}
+            onInformation={() => setOpenDeviceInformation(true)}
+          />
         </Sidebar>
         <Main>
           <Grid
@@ -208,6 +223,16 @@ export default function Page() {
               </List>
             </Box>
           </Box>
+        </Layer>
+      )}
+      {openDeviceSettings && (
+        <Layer full='vertical' onClickOutside={() => setOpenDeviceSettings(false)} position="right">
+          <Box fill pad='small'>abcd</Box>
+        </Layer>
+      )}
+      {openDeviceInformation && (
+        <Layer full='vertical' onClickOutside={() => setOpenDeviceInformation(false)} position="right">
+          <Box fill pad='small'>higk</Box>
         </Layer>
       )}
     </Box>
