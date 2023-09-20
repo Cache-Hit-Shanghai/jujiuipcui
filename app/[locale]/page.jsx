@@ -151,7 +151,11 @@ export default function Page() {
 				</Main>
 			</Box>
 			{openAddDevice && (
-				<Layer onClickOutside={() => setOpenAddDevice(false)} position='top'>
+				<Layer
+					onEsc={() => setOpenAddDevice(false)}
+					onClickOutside={() => setOpenAddDevice(false)}
+					position='top'
+				>
 					{stage === 0 && (
 						<Box border width='medium' pad='small' gap='medium'>
 							<Heading level={3} alignSelf='center' margin='none'>
@@ -177,7 +181,11 @@ export default function Page() {
 				</Layer>
 			)}
 			{openDeviceGroup && (
-				<Layer onClickOutside={() => setOpenDeviceGroup(false)} position='top'>
+				<Layer
+					onEsc={() => setOpenDeviceGroup(false)}
+					onClickOutside={() => setOpenDeviceGroup(false)}
+					position='top'
+				>
 					<Box border width='medium' pad='small' gap='medium'>
 						<Heading level={3} alignSelf='center' margin='none'>
 							设备分组
@@ -208,7 +216,12 @@ export default function Page() {
 				</Layer>
 			)}
 			{openDeviceSettings && (
-				<Layer full='vertical' onClickOutside={() => setOpenDeviceSettings(false)} position='right'>
+				<Layer
+					full='vertical'
+					onEsc={() => setOpenDeviceSettings(false)}
+					onClickOutside={() => setOpenDeviceSettings(false)}
+					position='right'
+				>
 					<Box width='medium' pad='small' gap='small'>
 						<Heading level={3} alignSelf='center'>
 							设备设置 - 客厅
@@ -217,7 +230,12 @@ export default function Page() {
 				</Layer>
 			)}
 			{openDeviceInformation && (
-				<Layer full='vertical' onClickOutside={() => setOpenDeviceInformation(false)} position='right'>
+				<Layer
+					full='vertical'
+					onEsc={() => setOpenDeviceInformation(false)}
+					onClickOutside={() => setOpenDeviceInformation(false)}
+					position='right'
+				>
 					<Box width='medium' pad='small' gap='small'>
 						<Heading level={3} alignSelf='center'>
 							设备信息 - 客厅
