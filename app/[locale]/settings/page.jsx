@@ -3,13 +3,9 @@
 import { Heading, Box, Tabs, Tab, Avatar, Main } from 'grommet';
 import { User } from 'grommet-icons';
 import { PCNav, PCSideBar } from '@/app/components';
-import {
-	ChangeAvatar,
-	ChangeNickname,
-	ChangePassword,
-} from '@/jujiu-ui-components/application/settings/account';
-import { ChangeNotification, ChangeAIAlarm } from '@/jujiu-ui-components/application/settings/notification';
-import { ChangeUI } from '@/jujiu-ui-components/application/settings/ui';
+import { ChangeAvatar, ChangeNickname, ChangePassword } from '@/jujiu-ui-components/ipc/settings/account';
+import { ChangeNotification, ChangeAIAlarm } from '@/jujiu-ui-components/ipc/settings/notification';
+import { ChangeUI } from '@/jujiu-ui-components/ipc/settings/ui';
 
 export default function Page() {
 	return (

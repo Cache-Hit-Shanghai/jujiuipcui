@@ -30,8 +30,8 @@ import {
 } from '@/jujiu-ui-components/components';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/jujiu-tags';
 import { PCNav, PCSideBar } from '@/app/components';
-import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/application/device/binding';
-import { DeviceInformation } from '@/jujiu-ui-components/application/device/information';
+import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/ipc/device/binding';
+import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 
 function CameraList({ onSettings, onInformation }) {
 	return (
