@@ -12,11 +12,7 @@ import {
 	Stack,
 	Heading,
 	Layer,
-	Button,
-	TextInput,
-	List,
 } from 'grommet';
-import { FormEdit, FormTrash } from 'grommet-icons';
 import { useRef, useState } from 'react';
 import {
 	IpcCardSelectable,
@@ -29,7 +25,6 @@ import {
 	ZoomControl,
 } from '@/jujiu-ui-components/components';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/jujiu-tags';
-import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/ipc/device/binding';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 
 function CameraList({ onSettings, onInformation }) {
@@ -115,11 +110,8 @@ export function VideoPlayer({ ...prop }) {
 }
 
 export default function Page() {
-	const [openAddDevice, setOpenAddDevice] = useState(false);
-	const [openDeviceGroup, setOpenDeviceGroup] = useState(false);
 	const [openDeviceSettings, setOpenDeviceSettings] = useState(false);
 	const [openDeviceInformation, setOpenDeviceInformation] = useState(false);
-	const [stage, setStage] = useState(0);
 	return (
 		<>
 			<Sidebar flex={false} width='medium' overflow='auto' pad='none' background='background'>
@@ -145,71 +137,6 @@ export default function Page() {
 					))}
 				</Grid>
 			</Main>
-			{openAddDevice && (
-				<Layer
-					onEsc={() => setOpenAddDevice(false)}
-					onClickOutside={() => setOpenAddDevice(false)}
-					position='top'
-				>
-					{stage === 0 && (
-						<Box border width='medium' pad='small' gap='medium'>
-							<Heading level={3} alignSelf='center' margin='none'>
-								添加设备
-							</Heading>
-							<WiFiBinding />
-							<Box direction='row' justify='end'>
-								<Button label='下一步' onClick={() => setStage(1)} />
-							</Box>
-						</Box>
-					)}
-					{stage === 1 && (
-						<Box border width='medium' pad='small' gap='medium'>
-							<Heading level={3} alignSelf='center' margin='none'>
-								添加设备
-							</Heading>
-							<DeviceBinding />
-							<Box direction='row'>
-								<Button label='上一步' onClick={() => setStage(0)} />
-							</Box>
-						</Box>
-					)}
-				</Layer>
-			)}
-			{openDeviceGroup && (
-				<Layer
-					onEsc={() => setOpenDeviceGroup(false)}
-					onClickOutside={() => setOpenDeviceGroup(false)}
-					position='top'
-				>
-					<Box border width='medium' pad='small' gap='medium'>
-						<Heading level={3} alignSelf='center' margin='none'>
-							设备分组
-						</Heading>
-						<Box direction='row' gap='small' align='center'>
-							<TextInput placeholder='请输入分组名……' />
-							<Button label='添加分组' />
-						</Box>
-						<Box>
-							<List
-								data={[
-									{ name: '默认分组', disabled: true },
-									{ name: '办公室', disabled: false },
-								]}
-							>
-								{(datum) => (
-									<Box direction='row' align='center' justify='between'>
-										<Text color={datum.disabled ? 'status-disabled' : 'undefined'}>{datum.name}</Text>
-										<Box direction='row'>
-											<Button disabled={datum.disabled} icon={<FormEdit />} />
-											<Button disabled={datum.disabled} icon={<FormTrash />} />
-										</Box>
-									</Box>
-								)}
-							</List>
-						</Box>
-					</Box>
-				</Layer>
-			)}
 			{openDeviceSettings && (
 				<Layer
 					full='vertical'
