@@ -1,6 +1,6 @@
 'use client';
 
-import { Heading, Box, Tabs, Tab, Avatar, Main } from 'grommet';
+import { Heading, Box, Avatar } from 'grommet';
 import { User } from 'grommet-icons';
 import { ChangeAvatar, ChangeNickname, ChangePassword } from '@/jujiu-ui-components/ipc/settings/account';
 import { ChangeNotification, ChangeAIAlarm } from '@/jujiu-ui-components/ipc/settings/notification';
