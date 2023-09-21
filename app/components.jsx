@@ -1,7 +1,21 @@
+'use client';
+
 import { Sidebar, Nav, Select, Box, Menu, Text } from 'grommet';
 import { Add, User, Logout, Webcam, System, CloudComputer } from 'grommet-icons';
 import { Group } from '@styled-icons/fluentui-system-regular/Group';
 import { ButtonLink } from '@/jujiu-ui-components/core/core-ui';
+
+export function MainFrame({ children }) {
+	return (
+		<Box fill gap='small' background='background-contrast'>
+			<PCNav />
+			<Box direction='row' flex={{ grow: 1, shrink: 1 }} gap='small'>
+				<PCSideBar />
+				{children}
+			</Box>
+		</Box>
+	);
+}
 
 export function PCNav({ onAddDevice, onDeviceGroup }) {
 	return (

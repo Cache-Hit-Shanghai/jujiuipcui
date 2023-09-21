@@ -29,7 +29,6 @@ import {
 	ZoomControl,
 } from '@/jujiu-ui-components/components';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/jujiu-tags';
-import { PCNav, PCSideBar } from '@/app/components';
 import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/ipc/device/binding';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 
@@ -122,34 +121,30 @@ export default function Page() {
 	const [openDeviceInformation, setOpenDeviceInformation] = useState(false);
 	const [stage, setStage] = useState(0);
 	return (
-		<Box fill gap='small' background='background-contrast'>
-			<PCNav onAddDevice={() => setOpenAddDevice(true)} onDeviceGroup={() => setOpenDeviceGroup(true)} />
-			<Box direction='row' flex={{ grow: 1, shrink: 1 }} gap='small'>
-				<PCSideBar />
-				<Sidebar flex={false} width='medium' overflow='auto' pad='none' background='background'>
-					<CameraList
-						onSettings={() => setOpenDeviceSettings(true)}
-						onInformation={() => setOpenDeviceInformation(true)}
-					/>
-				</Sidebar>
-				<Main>
-					<Grid
-						fill
-						columns='640px'
-						align='center'
-						justify='center'
-						style={{
-							gridAutoFlow: 'row dense',
-							gridAutoRows: '480px',
-							gap: '12px',
-						}}
-					>
-						{Array.from({ length: 20 }, (_, index) => index).map((item) => (
-							<VideoPlayer key={item} />
-						))}
-					</Grid>
-				</Main>
-			</Box>
+		<>
+			<Sidebar flex={false} width='medium' overflow='auto' pad='none' background='background'>
+				<CameraList
+					onSettings={() => setOpenDeviceSettings(true)}
+					onInformation={() => setOpenDeviceInformation(true)}
+				/>
+			</Sidebar>
+			<Main>
+				<Grid
+					fill
+					columns='640px'
+					align='center'
+					justify='center'
+					style={{
+						gridAutoFlow: 'row dense',
+						gridAutoRows: '480px',
+						gap: '12px',
+					}}
+				>
+					{Array.from({ length: 20 }, (_, index) => index).map((item) => (
+						<VideoPlayer key={item} />
+					))}
+				</Grid>
+			</Main>
 			{openAddDevice && (
 				<Layer
 					onEsc={() => setOpenAddDevice(false)}
@@ -244,6 +239,6 @@ export default function Page() {
 					</Box>
 				</Layer>
 			)}
-		</Box>
+		</>
 	);
 }
