@@ -12,7 +12,9 @@ import {
 	Stack,
 	Heading,
 	Layer,
+	Button,
 } from 'grommet';
+import { FormClose } from 'grommet-icons';
 import { useRef, useState } from 'react';
 import {
 	IpcCardSelectable,
@@ -90,9 +92,14 @@ export function VideoPlayer({ ...prop }) {
 				<Video controls={false} />
 				<Stack fill>
 					<Box fill justify='between'>
-						<Box pad='small' direction='row' justify='center'>
-							<Text>云探1</Text>
-						</Box>
+						<Stack>
+							<Box pad='small' direction='row' justify='center'>
+								<Text>云探1</Text>
+							</Box>
+							<Box direction='row' justify='end'>
+								<Button icon={<FormClose />} tip='关闭' />
+							</Box>
+						</Stack>
 						<Box direction='row' justify='center' gap='small'>
 							<ScreenCopyControl showTitle={false} />
 							<RecordControl showTitle={false} />
