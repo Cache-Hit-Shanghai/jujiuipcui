@@ -1,10 +1,10 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
-import { useRouter } from 'next-intl/client';
+import { useRouter, usePathname } from 'next-intl/client';
 
 export default Link;
-export { useRouter };
+export { useRouter, usePathname };
 
 export function useJuJiuT() {
-  return useTranslations('Index');
+	return useTranslations('Index');
 }

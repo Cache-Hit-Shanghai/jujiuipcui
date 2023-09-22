@@ -33,6 +33,7 @@ import {
 	FormTrash,
 	FormClose,
 } from 'grommet-icons';
+import { usePathname } from '@/state/translate';
 import { Group } from '@styled-icons/fluentui-system-regular/Group';
 import { ButtonLink } from '@/jujiu-ui-components/core/core-ui';
 import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/ipc/device/binding';
@@ -163,11 +164,11 @@ export function PCNav() {
 	);
 }
 
-function FlexLinkListItem({ icon, label, href, shrink }) {
+function FlexLinkListItem({ label, shrink, ...props }) {
 	if (shrink) {
-		return <ButtonLink icon={icon} href={href} tip={label} />;
+		return <ButtonLink tip={label} {...props} />;
 	} else {
-		return <ButtonLink icon={icon} href={href} label={label} plain margin='small' />;
+		return <ButtonLink plain margin='small' label={label} {...props} />;
 	}
 }
 
@@ -181,17 +182,20 @@ export function PCSideBar() {
 		{
 			icon: <System />,
 			label: '系统设置',
-			href: '/settings',
+			href: '/settings/',
 		},
 	];
 
 	const [shrink, setShrink] = useState(false);
+	const pathname = usePathname();
 
 	return (
 		<Sidebar background='background' flex={false} pad='none'>
-			<Nav gap='small' flex={{ grow: 1, shrink: 1 }} overflow='auto' pad='small'>
+			<Nav gap='small' flex={{ grow: 1, shrink: 1 }} overflow='auto' pad={{ top: 'small' }}>
 				{PCSideBarData.map((datum) => (
-					<FlexLinkListItem icon={datum.icon} label={datum.label} href={datum.href} shrink={shrink} />
+					<Box background={pathname === datum.href ? 'brand' : 'transparent'}>
+						<FlexLinkListItem icon={datum.icon} label={datum.label} href={datum.href} shrink={shrink} />
+					</Box>
 				))}
 			</Nav>
 			<Box flex={false} border='top' />
