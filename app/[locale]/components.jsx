@@ -23,6 +23,8 @@ import {
 import {
 	Add,
 	User,
+	Next,
+	Previous,
 	Logout,
 	Webcam,
 	System,
@@ -161,13 +163,41 @@ export function PCNav() {
 	);
 }
 
+function FlexLinkListItem({ icon, label, href, shrink }) {
+	if (shrink) {
+		return <ButtonLink icon={icon} href={href} tip={label} />;
+	} else {
+		return <ButtonLink icon={icon} href={href} label={label} plain margin='small' />;
+	}
+}
+
 export function PCSideBar() {
+	const PCSideBarData = [
+		{
+			icon: <Webcam />,
+			label: '实时视频',
+			href: '/',
+		},
+		{
+			icon: <System />,
+			label: '系统设置',
+			href: '/settings',
+		},
+	];
+
+	const [shrink, setShrink] = useState(false);
+
 	return (
-		<Sidebar background='background' flex={false}>
-			<Nav gap='small'>
-				<ButtonLink icon={<Webcam />} href='/' tip='实时视频' />
-				<ButtonLink icon={<System />} href='/settings' tip='系统设置' />
+		<Sidebar background='background' flex={false} pad='none'>
+			<Nav gap='small' flex={{ grow: 1, shrink: 1 }} overflow='auto' pad='small'>
+				{PCSideBarData.map((datum) => (
+					<FlexLinkListItem icon={datum.icon} label={datum.label} href={datum.href} shrink={shrink} />
+				))}
 			</Nav>
+			<Box flex={false} border='top' />
+			<Box flex={false} pad='small' direction='row' justify='end'>
+				<Button icon={shrink ? <Next /> : <Previous />} onClick={() => setShrink(!shrink)} />
+			</Box>
 		</Sidebar>
 	);
 }
