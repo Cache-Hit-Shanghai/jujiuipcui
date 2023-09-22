@@ -46,9 +46,9 @@ import {
 	PanLayer,
 	ResolutionControl,
 	ZoomControl,
-} from '@/jujiu-ui-components/components';
+} from '@/jujiu-ui-components/ipc/video/control';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
-import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/jujiu-tags';
+import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
 
 export function MainFrame({ children }) {
 	return (
