@@ -168,7 +168,7 @@ function FlexLinkListItem({ label, shrink, ...props }) {
 	if (shrink) {
 		return <ButtonLink tip={label} {...props} />;
 	} else {
-		return <ButtonLink plain margin='small' label={label} {...props} />;
+		return <ButtonLink plain margin={{ vertical: 'small', horizontal: 'medium' }} label={label} {...props} />;
 	}
 }
 
