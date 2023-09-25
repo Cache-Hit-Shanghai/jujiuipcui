@@ -1,5 +1,10 @@
 {
   "Index": {
+    "AI报警事件类型设置": "AI Alarm Settings",
+    "账号设置": "Account Settings",
+    "通知设置": "Notification Settings",
+    "界面设置": "UI Settings",
+    "修改密码": "Change Password",
     "标清": "HD",
     "超清": "FHD",
     "极清": "2K",

@@ -5,8 +5,10 @@ import { User } from 'grommet-icons';
 import { ChangeAvatar, ChangeNickname, ChangePassword } from '@/jujiu-ui-components/ipc/settings/account';
 import { ChangeNotification, ChangeAIAlarm } from '@/jujiu-ui-components/ipc/settings/notification';
 import { ChangeUI } from '@/jujiu-ui-components/ipc/settings/ui';
+import { useJuJiuT } from '@/state/translate';
 
 export function AccountSettings() {
+	const t = useJuJiuT();
 	return (
 		<Box wrap direction='row' gap='small'>
 			<Box border width='medium' gap='small' pad='medium' round='small'>
@@ -20,7 +22,7 @@ export function AccountSettings() {
 			</Box>
 			<Box border width='medium' gap='small' pad='medium' round='small'>
 				<Heading level={3} alignSelf='center' margin='none'>
-					修改密码
+					{t('修改密码')}
 				</Heading>
 				<ChangePassword />
 			</Box>
@@ -29,17 +31,18 @@ export function AccountSettings() {
 }
 
 export function NotificationSettings() {
+	const t = useJuJiuT();
 	return (
 		<Box wrap direction='row' gap='small'>
 			<Box border width='medium' gap='small' pad='medium' round='small'>
 				<Heading level={3} alignSelf='center' margin='none'>
-					修改消息通知
+					{t('通知设置')}
 				</Heading>
 				<ChangeNotification />
 			</Box>
 			<Box border width='medium' gap='small' pad='medium' round='small'>
 				<Heading level={3} alignSelf='center' margin='none'>
-					修改AI报警事件类型
+					{t('AI报警事件类型设置')}
 				</Heading>
 				<ChangeAIAlarm />
 			</Box>
@@ -48,11 +51,12 @@ export function NotificationSettings() {
 }
 
 export function UiSettings() {
+	const t = useJuJiuT();
 	return (
 		<Box wrap direction='row' gap='small'>
 			<Box border width='medium' gap='small' pad='medium' round='small'>
 				<Heading level={3} alignSelf='center' margin='none'>
-					修改界面
+					{t('界面设置')}
 				</Heading>
 				<ChangeUI />
 			</Box>
