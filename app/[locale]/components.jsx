@@ -24,6 +24,7 @@ import {
 	Add,
 	User,
 	Next,
+	Expand,
 	Previous,
 	Logout,
 	Webcam,
@@ -358,6 +359,7 @@ function VideoPlayer({ ...prop }) {
 							<PanLayer target={ref} />
 							<ResolutionControl showTitle={false} />
 							<ZoomControl showTitle={false} />
+							<Button icon={<Expand />} tip={t('全屏')} />
 						</Box>
 					</Box>
 				</Stack>
