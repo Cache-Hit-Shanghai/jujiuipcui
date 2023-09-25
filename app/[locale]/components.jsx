@@ -52,7 +52,6 @@ import { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate'
 
 export function LanguageChanger() {
 	const locale = useLocale();
-	console.log(locale);
 	const router = useRouter();
 	const pathname = usePathname();
 	const languages = [
@@ -104,18 +103,18 @@ export function PCNav() {
 					dropProps={{ align: { top: 'bottom', left: 'left' } }}
 					items={[
 						{
-							label: '添加设备',
+							label: t('添加设备'),
 							icon: <Add />,
 							gap: 'small',
 							onClick: () => setOpenAddDevice(true),
 						},
 						{
-							label: '设备分组',
+							label: t('设备分组'),
 							icon: <Group size='24' />,
 							gap: 'small',
 							onClick: () => setOpenDeviceGroup(true),
 						},
-						{ label: '退出登录', icon: <Logout />, gap: 'small' },
+						{ label: t('退出登录'), icon: <Logout />, gap: 'small' },
 					]}
 				/>
 			</Box>
@@ -192,20 +191,29 @@ function FlexLinkListItem({ label, shrink, ...props }) {
 	if (shrink) {
 		return <ButtonLink tip={label} {...props} />;
 	} else {
-		return <ButtonLink plain margin={{ vertical: 'small', horizontal: 'medium' }} label={label} {...props} />;
+		return (
+			<ButtonLink
+				alignSelf='start'
+				plain
+				label={label}
+				margin={{ vertical: 'small', horizontal: 'medium' }}
+				{...props}
+			/>
+		);
 	}
 }
 
 export function PCSideBar() {
+	const t = useJuJiuT();
 	const PCSideBarData = [
 		{
 			icon: <Webcam />,
-			label: '实时视频',
+			label: t('实时视频'),
 			href: '/',
 		},
 		{
 			icon: <System />,
-			label: '系统设置',
+			label: t('系统设置'),
 			href: '/settings/',
 		},
 	];
@@ -234,6 +242,7 @@ export function PCSideBar() {
 }
 
 export function CameraList() {
+	const t = useJuJiuT();
 	const [openDeviceSettings, setOpenDeviceSettings] = useState(false);
 	const [openDeviceInformation, setOpenDeviceInformation] = useState(false);
 	const onSettings = () => setOpenDeviceSettings(true);
@@ -242,7 +251,7 @@ export function CameraList() {
 	return (
 		<Sidebar flex={false} width='medium' overflow='auto' pad='none' background='background'>
 			<Accordion>
-				<AccordionPanel label={<Text margin='small'>默认分组</Text>}>
+				<AccordionPanel label={<Text margin='small'>{t('默认分组')}</Text>}>
 					<Box gap='medium' margin='small'>
 						<IpcCardSelectable
 							label={
@@ -325,6 +334,7 @@ export function CameraList() {
 }
 
 function VideoPlayer({ ...prop }) {
+	const t = useJuJiuT();
 	const ref = useRef();
 	return (
 		<Box fill background='black' {...prop} ref={ref}>
@@ -337,7 +347,7 @@ function VideoPlayer({ ...prop }) {
 								<Text>云探1</Text>
 							</Box>
 							<Box direction='row' justify='end'>
-								<Button icon={<FormClose />} tip='关闭' />
+								<Button icon={<FormClose />} tip={t('关闭')} />
 							</Box>
 						</Stack>
 						<Box direction='row' justify='center' gap='small'>
