@@ -1,5 +1,11 @@
 {
   "Index": {
+    "上一步": "Back",
+    "下一步": "Next",
+    "请输入分组名……": "Please input device group name...",
+    "删除分组": "Delete Device Group",
+    "编辑分组": "Edit Device Group",
+    "添加分组": "Add Device Group",
     "AI报警事件类型设置": "AI Alarm Settings",
     "账号设置": "Account Settings",
     "通知设置": "Notification Settings",

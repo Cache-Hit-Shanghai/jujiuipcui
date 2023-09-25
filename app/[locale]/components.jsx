@@ -127,22 +127,22 @@ export function PCNav() {
 					{stage === 0 && (
 						<Box border width='medium' pad='small' gap='medium'>
 							<Heading level={3} alignSelf='center' margin='none'>
-								添加设备
+								{t('添加设备')}
 							</Heading>
 							<WiFiBinding />
 							<Box direction='row' justify='end'>
-								<Button label='下一步' onClick={() => setStage(1)} />
+								<Button label={t('下一步')} onClick={() => setStage(1)} />
 							</Box>
 						</Box>
 					)}
 					{stage === 1 && (
 						<Box border width='medium' pad='small' gap='medium'>
 							<Heading level={3} alignSelf='center' margin='none'>
-								添加设备
+								{t('添加设备')}
 							</Heading>
 							<DeviceBinding />
 							<Box direction='row'>
-								<Button label='上一步' onClick={() => setStage(0)} />
+								<Button label={t('上一步')} onClick={() => setStage(0)} />
 							</Box>
 						</Box>
 					)}
@@ -156,16 +156,16 @@ export function PCNav() {
 				>
 					<Box border width='medium' pad='small' gap='medium'>
 						<Heading level={3} alignSelf='center' margin='none'>
-							设备分组
+							{t('设备分组')}
 						</Heading>
 						<Box direction='row' gap='small' align='center'>
-							<TextInput placeholder='请输入分组名……' />
-							<Button label='添加分组' />
+							<TextInput placeholder={t('请输入分组名……')} />
+							<Button primary icon={<Add />} tip={t('添加分组')} />
 						</Box>
 						<Box>
 							<List
 								data={[
-									{ name: '默认分组', disabled: true },
+									{ name: t('默认分组'), disabled: true },
 									{ name: '办公室', disabled: false },
 								]}
 							>
@@ -173,8 +173,8 @@ export function PCNav() {
 									<Box direction='row' align='center' justify='between'>
 										<Text color={datum.disabled ? 'status-disabled' : 'undefined'}>{datum.name}</Text>
 										<Box direction='row'>
-											<Button disabled={datum.disabled} icon={<FormEdit />} />
-											<Button disabled={datum.disabled} icon={<FormTrash />} />
+											<Button disabled={datum.disabled} icon={<FormEdit />} tip={t('编辑分组')} />
+											<Button disabled={datum.disabled} icon={<FormTrash />} tip={t('删除分组')} />
 										</Box>
 									</Box>
 								)}
@@ -309,7 +309,7 @@ export function CameraList() {
 				>
 					<Box width='medium' pad='small' gap='small'>
 						<Heading level={3} alignSelf='center'>
-							设备设置 - 客厅
+							{t('设备设置')} - 客厅
 						</Heading>
 					</Box>
 				</Layer>
@@ -323,7 +323,7 @@ export function CameraList() {
 				>
 					<Box width='medium' pad='small' gap='small'>
 						<Heading level={3} alignSelf='center'>
-							设备信息 - 客厅
+							{t('设备信息')} - 客厅
 						</Heading>
 						<DeviceInformation />
 					</Box>
