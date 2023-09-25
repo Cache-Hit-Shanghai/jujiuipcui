@@ -33,7 +33,6 @@ import {
 	FormTrash,
 	FormClose,
 } from 'grommet-icons';
-import { usePathname } from '@/state/translate';
 import { Group } from '@styled-icons/fluentui-system-regular/Group';
 import { ButtonLink } from '@/jujiu-ui-components/core/core-ui';
 import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/ipc/device/binding';
@@ -49,6 +48,28 @@ import {
 } from '@/jujiu-ui-components/ipc/video/control';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
+import { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate';
+
+export function LanguageChanger() {
+	const locale = useLocale();
+	console.log(locale);
+	const router = useRouter();
+	const pathname = usePathname();
+	const languages = [
+		{ locale: 'cn', label: '简体中文' },
+		{ locale: 'en', label: 'English' },
+	];
+
+	return (
+		<Select
+			options={languages}
+			labelKey='label'
+			valueKey={{ key: 'locale', reduce: true }}
+			value={locale}
+			onChange={(e) => router.push(pathname, { locale: e.target.value })}
+		/>
+	);
+}
 
 export function MainFrame({ children }) {
 	return (
@@ -63,6 +84,7 @@ export function MainFrame({ children }) {
 }
 
 export function PCNav() {
+	const t = useJuJiuT();
 	const [openAddDevice, setOpenAddDevice] = useState(false);
 	const [openDeviceGroup, setOpenDeviceGroup] = useState(false);
 	const [stage, setStage] = useState(0);
@@ -72,29 +94,31 @@ export function PCNav() {
 			<Box direction='row' align='center' gap='small'>
 				<CloudComputer size='large' />
 				<Text size='xlarge' weight='bold'>
-					雎鸠云视觉
+					{t('雎鸠云视觉')}
 				</Text>
 			</Box>
-			<Select options={['简体中文', 'English']} value='简体中文' />
-			<Menu
-				label={<User />}
-				dropProps={{ align: { top: 'bottom', left: 'left' } }}
-				items={[
-					{
-						label: '添加设备',
-						icon: <Add />,
-						gap: 'small',
-						onClick: () => setOpenAddDevice(true),
-					},
-					{
-						label: '设备分组',
-						icon: <Group size='24' />,
-						gap: 'small',
-						onClick: () => setOpenDeviceGroup(true),
-					},
-					{ label: '退出登录', icon: <Logout />, gap: 'small' },
-				]}
-			/>
+			<Box direction='row' gap='small'>
+				<LanguageChanger />
+				<Menu
+					label={<User />}
+					dropProps={{ align: { top: 'bottom', left: 'left' } }}
+					items={[
+						{
+							label: '添加设备',
+							icon: <Add />,
+							gap: 'small',
+							onClick: () => setOpenAddDevice(true),
+						},
+						{
+							label: '设备分组',
+							icon: <Group size='24' />,
+							gap: 'small',
+							onClick: () => setOpenDeviceGroup(true),
+						},
+						{ label: '退出登录', icon: <Logout />, gap: 'small' },
+					]}
+				/>
+			</Box>
 			{openAddDevice && (
 				<Layer
 					onEsc={() => setOpenAddDevice(false)}
@@ -193,14 +217,17 @@ export function PCSideBar() {
 		<Sidebar background='background' flex={false} pad='none'>
 			<Nav gap='small' flex={{ grow: 1, shrink: 1 }} overflow='auto' pad={{ top: 'small' }}>
 				{PCSideBarData.map((datum) => (
-					<Box background={pathname === datum.href ? 'brand' : 'transparent'}>
+					<Box background={pathname === datum.href ? 'control' : 'transparent'}>
 						<FlexLinkListItem icon={datum.icon} label={datum.label} href={datum.href} shrink={shrink} />
 					</Box>
 				))}
 			</Nav>
 			<Box flex={false} border='top' />
 			<Box flex={false} pad='small' direction='row' justify='end'>
-				<Button icon={shrink ? <Next /> : <Previous />} onClick={() => setShrink(!shrink)} />
+				<Button
+					icon={shrink ? <Next color='control' /> : <Previous color='control' />}
+					onClick={() => setShrink(!shrink)}
+				/>
 			</Box>
 		</Sidebar>
 	);

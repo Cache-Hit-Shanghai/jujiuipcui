@@ -16,7 +16,7 @@ export default async function RootLayout({ children, params: { locale } }) {
 	}
 
 	return (
-		<html>
+		<html lang={locale}>
 			<body>
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<GrommetRoot>
