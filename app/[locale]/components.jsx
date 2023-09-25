@@ -29,7 +29,7 @@ import {
 	Logout,
 	Webcam,
 	System,
-	CloudComputer,
+	CreativeCommons,
 	FormEdit,
 	FormTrash,
 	FormClose,
@@ -92,8 +92,8 @@ export function PCNav() {
 	return (
 		<Nav direction='row' background='background' pad='small' justify='between' flex={false}>
 			<Box direction='row' align='center' gap='small'>
-				<CloudComputer size='large' />
-				<Text size='xlarge' weight='bold'>
+				<CreativeCommons size='large' />
+				<Text size='xxlarge' weight='bold'>
 					{t('雎鸠云视觉')}
 				</Text>
 			</Box>
@@ -219,7 +219,7 @@ export function PCSideBar() {
 		},
 	];
 
-	const [shrink, setShrink] = useState(false);
+	const [shrink, setShrink] = useState(true);
 	const pathname = usePathname();
 
 	return (
