@@ -49,7 +49,7 @@ import {
 } from '@/jujiu-ui-components/ipc/video/control';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
-import { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate';
+import Link, { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate';
 
 export function LanguageChanger() {
 	const locale = useLocale();
@@ -83,6 +83,20 @@ export function MainFrame({ children }) {
 	);
 }
 
+function PCLogo() {
+	const t = useJuJiuT();
+	return (
+		<Link href={'/'} passHref legacyBehavior>
+			<Box direction='row' align='center' gap='small' focusIndicator={false}>
+				<CreativeCommons size='large' color='text-strong' />
+				<Text size='xxlarge' weight='bold' color='text-strong'>
+					{t('雎鸠云视觉')}
+				</Text>
+			</Box>
+		</Link>
+	);
+}
+
 export function PCNav() {
 	const t = useJuJiuT();
 	const [openAddDevice, setOpenAddDevice] = useState(false);
@@ -91,12 +105,7 @@ export function PCNav() {
 
 	return (
 		<Nav direction='row' background='background' pad='small' justify='between' flex={false}>
-			<Box direction='row' align='center' gap='small'>
-				<CreativeCommons size='large' />
-				<Text size='xxlarge' weight='bold'>
-					{t('雎鸠云视觉')}
-				</Text>
-			</Box>
+			<PCLogo />
 			<Box direction='row' gap='small'>
 				<LanguageChanger />
 				<Menu
