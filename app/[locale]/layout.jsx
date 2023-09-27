@@ -19,7 +19,7 @@ export default async function RootLayout({ children, params: { locale } }) {
 		<html lang={locale}>
 			<body>
 				<NextIntlClientProvider locale={locale} messages={messages}>
-					<GrommetRoot>
+					<GrommetRoot themeMode='light'>
 						<MainFrame>{children}</MainFrame>
 					</GrommetRoot>
 				</NextIntlClientProvider>
