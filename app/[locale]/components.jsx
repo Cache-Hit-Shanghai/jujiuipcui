@@ -93,7 +93,7 @@ export function PCNav() {
 		<Nav direction='row' background='background' pad='small' justify='between' flex={false}>
 			<Box direction='row' align='center' gap='small'>
 				<CreativeCommons size='large' />
-				<Text size='xxlarge' weight='bold' color='text-xweak'>
+				<Text size='xxlarge' weight='bold'>
 					{t('雎鸠云视觉')}
 				</Text>
 			</Box>
