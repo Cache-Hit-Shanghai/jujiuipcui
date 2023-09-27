@@ -49,6 +49,7 @@ import {
 } from '@/jujiu-ui-components/ipc/video/control';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
+import { IpcLogo } from '@/jujiu-ui-components/ipc/about/brand';
 import Link, { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate';
 
 export function LanguageChanger() {
@@ -87,12 +88,7 @@ function PCLogo() {
 	const t = useJuJiuT();
 	return (
 		<Link href={'/'} passHref legacyBehavior>
-			<Box direction='row' align='center' gap='small' focusIndicator={false}>
-				<CreativeCommons size='large' color='text-strong' />
-				<Text size='xxlarge' weight='bold' color='text-strong'>
-					{t('雎鸠云视觉')}
-				</Text>
-			</Box>
+			<IpcLogo />
 		</Link>
 	);
 }
