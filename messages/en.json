@@ -1,5 +1,16 @@
 {
   "Index": {
+    "已开机": "Running time",
+    "MAC地址": "MAC address",
+    "IP地址": "IP address",
+    "设备当前WiFi": "Connected WiFi",
+    "设备固件版本": "Firmware version",
+    "移动侦测": "Motion Detection",
+    "双向语音": "Bidirectional Talk",
+    "设备特性": "Functionality",
+    "设备统一SN": "Formalized SN",
+    "序列号": "SN",
+    "设备型号": "Type",
     "请在听到网络摄像机“绑定设备”的提示音后，将该二维码放置在摄像机镜头前约30厘米左右，等待设备“配置成功”的提示音。": "Please put the QR code in front of the camera about 12 inch after hearing the voice tone of \"waiting for WiFi connection\".",
     "请输入需要网络摄像机连接的WiFi名称和密码，随后点击“下一步”。": "Please input the SSID and password of the WiFi to which the camera needs connect, then click \"Next\"。",
     "密码": "Password",
