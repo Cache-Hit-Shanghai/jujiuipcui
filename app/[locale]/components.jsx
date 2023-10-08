@@ -29,7 +29,7 @@ import {
 	Logout,
 	Webcam,
 	System,
-	CreativeCommons,
+	Language,
 	FormEdit,
 	FormTrash,
 	FormClose,
@@ -62,13 +62,16 @@ export function LanguageChanger() {
 	];
 
 	return (
-		<Select
-			options={languages}
-			labelKey='label'
-			valueKey={{ key: 'locale', reduce: true }}
-			value={locale}
-			onChange={(e) => router.push(pathname, { locale: e.target.value })}
-		/>
+		<Box width='small'>
+			<Select
+				plain
+				options={languages}
+				labelKey='label'
+				valueKey={{ key: 'locale', reduce: true }}
+				value={locale}
+				onChange={(e) => router.push(pathname, { locale: e.target.value })}
+			/>
+		</Box>
 	);
 }
 
@@ -102,7 +105,7 @@ export function PCNav() {
 	return (
 		<Nav direction='row' background='background' pad='small' justify='between' flex={false}>
 			<PCLogo />
-			<Box direction='row' gap='small'>
+			<Box direction='row' gap='small' align='center'>
 				<LanguageChanger />
 				<Menu
 					label={<User />}
