@@ -48,6 +48,7 @@ import {
 	ZoomControl,
 } from '@/jujiu-ui-components/ipc/video/control';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
+import { DeviceSettings } from '@/jujiu-ui-components/ipc/device/settings';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
 import { IpcLogo } from '@/jujiu-ui-components/ipc/about/brand';
 import Link, { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate';
@@ -320,6 +321,7 @@ export function CameraList() {
 						<Heading level={3} alignSelf='center'>
 							{t('设备设置')} - 客厅
 						</Heading>
+						<DeviceSettings />
 					</Box>
 				</Layer>
 			)}
