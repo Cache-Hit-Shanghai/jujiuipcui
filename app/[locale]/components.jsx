@@ -38,7 +38,6 @@ import { Group } from '@styled-icons/fluentui-system-regular/Group';
 import { ButtonLink } from '@/jujiu-ui-components/core/core-ui';
 import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/ipc/device/binding';
 import {
-	IpcCardSelectable,
 	ScreenCopyControl,
 	ChatControl,
 	MuteControl,
@@ -47,6 +46,7 @@ import {
 	ResolutionControl,
 	ZoomControl,
 } from '@/jujiu-ui-components/ipc/video/control';
+import { IpcCardSelectable } from '@/jujiu-ui-components/ipc/device/avatar';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 import { DeviceSettings } from '@/jujiu-ui-components/ipc/device/settings';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
