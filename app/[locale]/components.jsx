@@ -252,6 +252,7 @@ export function PCSideBar() {
 }
 
 export function CameraList() {
+	const ref = useRef();
 	const t = useJuJiuT();
 	const [openDeviceSettings, setOpenDeviceSettings] = useState(false);
 	const [openDeviceInformation, setOpenDeviceInformation] = useState(false);
@@ -317,11 +318,11 @@ export function CameraList() {
 					onClickOutside={() => setOpenDeviceSettings(false)}
 					position='right'
 				>
-					<Box width='medium' pad='small' gap='small'>
+					<Box width='medium' pad='small' gap='small' ref={ref} overflow='auto'>
 						<Heading level={3} alignSelf='center'>
 							{t('设备设置')} - 客厅
 						</Heading>
-						<DeviceSettings />
+						<DeviceSettings target={ref} />
 					</Box>
 				</Layer>
 			)}
