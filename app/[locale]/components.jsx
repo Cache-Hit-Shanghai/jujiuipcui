@@ -322,7 +322,7 @@ export function CameraList() {
 						<Heading level={3} alignSelf='center'>
 							{t('设备设置')} - 客厅
 						</Heading>
-						<DeviceSettings target={ref} />
+						<DeviceSettings target={ref} gap='small' />
 					</Box>
 				</Layer>
 			)}
