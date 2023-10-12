@@ -16,6 +16,7 @@ import {
 	Layer,
 	Button,
 	TextInput,
+	CheckBox,
 	List,
 	Accordion,
 	AccordionPanel,
@@ -29,12 +30,14 @@ import {
 	Logout,
 	Webcam,
 	System,
-	Language,
+	More,
 	FormEdit,
 	FormTrash,
 	FormClose,
+	CircleInformation,
 } from 'grommet-icons';
 import { Group } from '@styled-icons/fluentui-system-regular/Group';
+import { SettingsOutline } from '@styled-icons/evaicons-outline/SettingsOutline';
 import { ButtonLink } from '@/jujiu-ui-components/core/core-ui';
 import { WiFiBinding, DeviceBinding } from '@/jujiu-ui-components/ipc/device/binding';
 import {
@@ -46,7 +49,7 @@ import {
 	ResolutionControl,
 	ZoomControl,
 } from '@/jujiu-ui-components/ipc/video/control';
-import { IpcCardSelectable } from '@/jujiu-ui-components/ipc/device/avatar';
+import { IpcCardRaw } from '@/jujiu-ui-components/ipc/device/avatar';
 import { DeviceInformation } from '@/jujiu-ui-components/ipc/device/information';
 import { DeviceSettings } from '@/jujiu-ui-components/ipc/device/settings';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
@@ -248,6 +251,66 @@ export function PCSideBar() {
 				/>
 			</Box>
 		</Sidebar>
+	);
+}
+
+function IpcCardMenu({ onSettings, onInformation }) {
+	const t = useJuJiuT();
+	const labelDeviceSettings = t('设备设置');
+	const labelDeviceInformation = t('设备信息');
+	const settingsLabel = onSettings ? (
+		<Text>{labelDeviceSettings}</Text>
+	) : (
+		<Link href='/device/settings' passHref legacyBehavior>
+			<Text>{labelDeviceSettings}</Text>
+		</Link>
+	);
+	const informationsLabel = onInformation ? (
+		<Text>{labelDeviceInformation}</Text>
+	) : (
+		<Link href='/device/information' passHref legacyBehavior>
+			<Text>{labelDeviceInformation}</Text>
+		</Link>
+	);
+
+	return (
+		<Menu
+			dropProps={{ align: { top: 'bottom', right: 'right' } }}
+			icon={<More />}
+			items={[
+				{
+					label: settingsLabel,
+					icon: (
+						<Box margin={{ right: 'small' }}>
+							<SettingsOutline size='24' />
+						</Box>
+					),
+					onClick: onSettings,
+				},
+				{
+					label: informationsLabel,
+					icon: (
+						<Box margin={{ right: 'small' }}>
+							<CircleInformation />
+						</Box>
+					),
+					onClick: onInformation,
+				},
+			]}
+		/>
+	);
+}
+
+export function IpcCardSelectable({ onSelect, selected = false, onSettings, onInformation, ...passProps }) {
+	return (
+		<Stack anchor='top-right'>
+			<IpcCardRaw {...passProps}>
+				<IpcCardMenu onSettings={onSettings} onInformation={onInformation} />
+			</IpcCardRaw>
+			<Box pad='small'>
+				<CheckBox checked={selected} onChange={(e) => onSelect?.(e.target.checked)} />
+			</Box>
+		</Stack>
 	);
 }
 
