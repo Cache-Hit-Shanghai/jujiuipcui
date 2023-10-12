@@ -8,7 +8,6 @@ import {
 	Grid,
 	Stack,
 	Video,
-	Sidebar,
 	Nav,
 	Select,
 	Menu,
@@ -95,7 +94,9 @@ function PCLogo() {
 	const t = useJuJiuT();
 	return (
 		<Link href={'/'} passHref legacyBehavior>
-			<IpcLogo />
+			<Box>
+				<IpcLogo />
+			</Box>
 		</Link>
 	);
 }
@@ -235,10 +236,10 @@ export function PCSideBar() {
 	const pathname = usePathname();
 
 	return (
-		<Sidebar background='background' flex={false} pad='none'>
+		<Box background='background' flex={false} pad='none'>
 			<Nav gap='small' flex={{ grow: 1, shrink: 1 }} overflow='auto' pad={{ top: 'small' }}>
 				{PCSideBarData.map((datum) => (
-					<Box background={pathname === datum.href ? 'control' : 'transparent'}>
+					<Box key={datum.href} background={pathname === datum.href ? 'control' : 'transparent'}>
 						<FlexLinkListItem icon={datum.icon} label={datum.label} href={datum.href} shrink={shrink} />
 					</Box>
 				))}
@@ -250,7 +251,7 @@ export function PCSideBar() {
 					onClick={() => setShrink(!shrink)}
 				/>
 			</Box>
-		</Sidebar>
+		</Box>
 	);
 }
 
@@ -323,7 +324,7 @@ export function CameraList() {
 	const onInformation = () => setOpenDeviceInformation(true);
 
 	return (
-		<Sidebar flex={false} width='medium' overflow='auto' pad='none' background='background'>
+		<Box flex={false} width='medium' overflow='auto' pad='none' background='background'>
 			<Accordion>
 				<AccordionPanel label={<Text margin='small'>{t('默认分组')}</Text>}>
 					<Box gap='medium' margin='small'>
@@ -404,7 +405,7 @@ export function CameraList() {
 					</Box>
 				</Layer>
 			)}
-		</Sidebar>
+		</Box>
 	);
 }
 
