@@ -275,32 +275,32 @@ const menuItemData = [
 	{
 		label: '设备设置',
 		icon: <SettingsOutline size='24' />,
-		panel: <DeviceSettings gap='small' />,
+		panel: DeviceSettings,
 	},
 	{
 		label: '设备信息',
 		icon: <CircleInformation />,
-		panel: <DeviceInformation />,
+		panel: DeviceInformation,
 	},
 	{
 		label: '设备分享',
 		icon: <ShareRounded />,
-		panel: <Box />,
+		panel: Box,
 	},
 	{
 		label: '设备转移',
 		icon: <Transaction />,
-		panel: <Box />,
+		panel: Box,
 	},
 	{
 		label: '通讯录',
 		icon: <ContactInfo />,
-		panel: <Box />,
+		panel: Box,
 	},
 	{
 		label: '日程提醒',
 		icon: <Calendar />,
-		panel: <Box />,
+		panel: Box,
 	},
 ];
 
@@ -316,6 +316,8 @@ export function IpcCardSelectable({ type = 'ipc', usn, onSelect, selected = fals
 	const t = useJuJiuT();
 	const ref = useRef();
 	const [menuItem, setMenuItem] = useState();
+	const Panel = menuItem?.panel;
+
 	return (
 		<Stack anchor='top-right'>
 			<IpcCardRaw {...passProps}>
@@ -335,7 +337,7 @@ export function IpcCardSelectable({ type = 'ipc', usn, onSelect, selected = fals
 						<Heading level={3} alignSelf='center'>
 							{t(menuItem.label)}
 						</Heading>
-						{menuItem.panel}
+						<Panel gap='small' />
 					</Box>
 				</Layer>
 			)}
