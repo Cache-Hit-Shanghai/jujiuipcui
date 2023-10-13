@@ -30,10 +30,14 @@ import {
 	Logout,
 	Webcam,
 	System,
+	Calendar,
 	Previous,
 	FormEdit,
 	FormTrash,
 	FormClose,
+	Transaction,
+	ContactInfo,
+	ShareRounded,
 	CircleInformation,
 } from 'grommet-icons';
 import { Group } from '@styled-icons/fluentui-system-regular/Group';
@@ -256,73 +260,91 @@ export function PCSideBar() {
 	);
 }
 
-function IpcCardMenu({ onSettings, onInformation }) {
+function IpcCardMenu({ menuData, onClick }) {
 	const t = useJuJiuT();
-	const labelDeviceSettings = t('设备设置');
-	const labelDeviceInformation = t('设备信息');
-	const settingsLabel = onSettings ? (
-		<Text>{labelDeviceSettings}</Text>
-	) : (
-		<Link href='/device/settings' passHref legacyBehavior>
-			<Text>{labelDeviceSettings}</Text>
-		</Link>
-	);
-	const informationsLabel = onInformation ? (
-		<Text>{labelDeviceInformation}</Text>
-	) : (
-		<Link href='/device/information' passHref legacyBehavior>
-			<Text>{labelDeviceInformation}</Text>
-		</Link>
-	);
-
-	return (
-		<Menu
-			dropProps={{ align: { top: 'bottom', right: 'right' } }}
-			icon={<More />}
-			items={[
-				{
-					label: settingsLabel,
-					icon: (
-						<Box margin={{ right: 'small' }}>
-							<SettingsOutline size='24' />
-						</Box>
-					),
-					onClick: onSettings,
-				},
-				{
-					label: informationsLabel,
-					icon: (
-						<Box margin={{ right: 'small' }}>
-							<CircleInformation />
-						</Box>
-					),
-					onClick: onInformation,
-				},
-			]}
-		/>
-	);
+	const items = menuData.map((item) => ({
+		label: t(item.label),
+		icon: item.icon,
+		gap: 'small',
+		onClick: () => onClick(item),
+	}));
+	return <Menu dropProps={{ align: { top: 'bottom', right: 'right' } }} icon={<More />} items={items} />;
 }
 
-export function IpcCardSelectable({ onSelect, selected = false, onSettings, onInformation, ...passProps }) {
+const menuItemData = [
+	{
+		label: '设备设置',
+		icon: <SettingsOutline size='24' />,
+		panel: <DeviceSettings gap='small' />,
+	},
+	{
+		label: '设备信息',
+		icon: <CircleInformation />,
+		panel: <DeviceInformation />,
+	},
+	{
+		label: '设备分享',
+		icon: <ShareRounded />,
+		panel: <Box />,
+	},
+	{
+		label: '设备转移',
+		icon: <Transaction />,
+		panel: <Box />,
+	},
+	{
+		label: '通讯录',
+		icon: <ContactInfo />,
+		panel: <Box />,
+	},
+	{
+		label: '日程提醒',
+		icon: <Calendar />,
+		panel: <Box />,
+	},
+];
+
+const menuItemDataFixedCamera = [menuItemData[0], menuItemData[1], menuItemData[2], menuItemData[3]];
+const menuItemDataRobot = [...menuItemData];
+
+const IpcCardMenuMap = new Map([
+	['ipc', menuItemDataFixedCamera],
+	['robot', menuItemDataRobot],
+]);
+
+export function IpcCardSelectable({ type = 'ipc', usn, onSelect, selected = false, onClick, ...passProps }) {
+	const t = useJuJiuT();
+	const ref = useRef();
+	const [menuItem, setMenuItem] = useState();
 	return (
 		<Stack anchor='top-right'>
 			<IpcCardRaw {...passProps}>
-				<IpcCardMenu onSettings={onSettings} onInformation={onInformation} />
+				<IpcCardMenu menuData={IpcCardMenuMap.get(type)} onClick={(item) => setMenuItem(item)} />
 			</IpcCardRaw>
 			<Box pad='small'>
 				<CheckBox checked={selected} onChange={(e) => onSelect?.(e.target.checked)} />
 			</Box>
+			{menuItem && (
+				<Layer
+					full='vertical'
+					onEsc={() => setMenuItem()}
+					onClickOutside={() => setMenuItem()}
+					position='right'
+				>
+					<Box width='medium' pad='small' gap='small' ref={ref} overflow='auto'>
+						<Heading level={3} alignSelf='center'>
+							{t(menuItem.label)}
+						</Heading>
+						{menuItem.panel}
+					</Box>
+				</Layer>
+			)}
 		</Stack>
 	);
 }
 
 export function CameraList() {
-	const ref = useRef();
 	const t = useJuJiuT();
-	const [openDeviceSettings, setOpenDeviceSettings] = useState(false);
-	const [openDeviceInformation, setOpenDeviceInformation] = useState(false);
-	const onSettings = () => setOpenDeviceSettings(true);
-	const onInformation = () => setOpenDeviceInformation(true);
 
 	return (
 		<Box flex={false} width='medium' overflow='auto' pad='none' background='background'>
@@ -337,8 +359,6 @@ export function CameraList() {
 									<JuJiuTagFromShared />
 								</Box>
 							}
-							onSettings={onSettings}
-							onInformation={onInformation}
 							imgurl='https://ts1.cn.mm.bing.net/th/id/R-C.f54c83f04442cec528a250d251251ce6?rik=JE7BoZk5xK4iEg&riu=http%3a%2f%2fpic4.bbzhi.com%2ffengjingbizhi%2fgaoqingxifengjingzhuomianbizhixiazai%2fgaoqingxifengjingzhuomianbizhixiazai_366146_18.jpg&ehk=YvUnl11nBp%2fGJssQUbYqkXLo7fchkD%2fEQ8BGpW2Urjs%3d&risl=&pid=ImgRaw&r=0'
 						/>
 						<IpcCardSelectable
@@ -349,10 +369,9 @@ export function CameraList() {
 									<JuJiuTagSharing />
 								</Box>
 							}
+							type='robot'
 							online
 							cloudStorage='expired'
-							onSettings={onSettings}
-							onInformation={onInformation}
 							imgurl='https://ts1.cn.mm.bing.net/th/id/R-C.0c8bf36e099654aadaf5f127ef1a3f1b?rik=uHrB%2blGez03%2fAA&riu=http%3a%2f%2fi3.img.969g.com%2fdown%2fimgx2014%2f10%2f24%2f289_102445_a1cff.jpg&ehk=EeF%2fioqRM6NfQqkCgXw%2bwLvO1%2fxZgeZ2pof7ALNLGsg%3d&risl=&pid=ImgRaw&r=0'
 						/>
 					</Box>
@@ -361,65 +380,47 @@ export function CameraList() {
 					<Box gap='medium' margin='small'>
 						<IpcCardSelectable
 							key={1}
-							label='办3'
-							onSettings={onSettings}
-							onInformation={onInformation}
+							label={
+								<Box direction='row' align='center' gap='small'>
+									<Webcam />
+									<Text>办公室3</Text>
+								</Box>
+							}
 							imgurl='https://ts1.cn.mm.bing.net/th/id/R-C.4894a961ab87e3459babae4ef8a2f4fa?rik=1P7ZI7Evnz4Pqg&riu=http%3a%2f%2fpic.zsucai.com%2ffiles%2f2013%2f0830%2fxiaguang2.jpg&ehk=Ok%2fjrv35R0L218oT%2flliRL8DJc52pARVnWU%2bXOpUwq4%3d&risl=&pid=ImgRaw&r=0'
 						/>
 						<IpcCardSelectable
 							key={2}
-							label='办5'
-							onSettings={onSettings}
-							onInformation={onInformation}
+							label={
+								<Box direction='row' align='center' gap='small'>
+									<Webcam />
+									<Text>办公室5</Text>
+								</Box>
+							}
 							imgurl='https://ts1.cn.mm.bing.net/th/id/R-C.f54c83f04442cec528a250d251251ce6?rik=JE7BoZk5xK4iEg&riu=http%3a%2f%2fpic4.bbzhi.com%2ffengjingbizhi%2fgaoqingxifengjingzhuomianbizhixiazai%2fgaoqingxifengjingzhuomianbizhixiazai_366146_18.jpg&ehk=YvUnl11nBp%2fGJssQUbYqkXLo7fchkD%2fEQ8BGpW2Urjs%3d&risl=&pid=ImgRaw&r=0'
 						/>
 						<IpcCardSelectable
 							key={3}
-							label='办7'
-							onSettings={onSettings}
-							onInformation={onInformation}
+							label={
+								<Box direction='row' align='center' gap='small'>
+									<Webcam />
+									<Text>办公室7</Text>
+								</Box>
+							}
 							imgurl='https://ts1.cn.mm.bing.net/th/id/R-C.3edbd350d03c25ed988236c50d0733e6?rik=txi3%2f%2b%2fVYUJofg&riu=http%3a%2f%2fpic.zsucai.com%2ffiles%2f2013%2f0802%2fwmdqfj4.jpg&ehk=TY9%2f90VQn6m3NYCoiPX2UyRYQIT7dkGJtTJli1W7pfo%3d&risl=&pid=ImgRaw&r=0'
 						/>
 						<IpcCardSelectable
 							key={4}
-							label='办9'
-							onSettings={onSettings}
-							onInformation={onInformation}
+							label={
+								<Box direction='row' align='center' gap='small'>
+									<Webcam />
+									<Text>办公室9</Text>
+								</Box>
+							}
 							imgurl='https://ts1.cn.mm.bing.net/th/id/R-C.0c8bf36e099654aadaf5f127ef1a3f1b?rik=uHrB%2blGez03%2fAA&riu=http%3a%2f%2fi3.img.969g.com%2fdown%2fimgx2014%2f10%2f24%2f289_102445_a1cff.jpg&ehk=EeF%2fioqRM6NfQqkCgXw%2bwLvO1%2fxZgeZ2pof7ALNLGsg%3d&risl=&pid=ImgRaw&r=0'
 						/>
 					</Box>
 				</AccordionPanel>
 			</Accordion>
-			{openDeviceSettings && (
-				<Layer
-					full='vertical'
-					onEsc={() => setOpenDeviceSettings(false)}
-					onClickOutside={() => setOpenDeviceSettings(false)}
-					position='right'
-				>
-					<Box width='medium' pad='small' gap='small' ref={ref} overflow='auto'>
-						<Heading level={3} alignSelf='center'>
-							{t('设备设置')} - 客厅
-						</Heading>
-						<DeviceSettings target={ref} gap='small' />
-					</Box>
-				</Layer>
-			)}
-			{openDeviceInformation && (
-				<Layer
-					full='vertical'
-					onEsc={() => setOpenDeviceInformation(false)}
-					onClickOutside={() => setOpenDeviceInformation(false)}
-					position='right'
-				>
-					<Box width='medium' pad='small' gap='small'>
-						<Heading level={3} alignSelf='center'>
-							{t('设备信息')} - 客厅
-						</Heading>
-						<DeviceInformation />
-					</Box>
-				</Layer>
-			)}
 		</Box>
 	);
 }
