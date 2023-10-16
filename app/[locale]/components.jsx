@@ -59,6 +59,7 @@ import { DeviceSettings } from '@/jujiu-ui-components/ipc/device/settings';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
 import { IpcLogo } from '@/jujiu-ui-components/ipc/about/brand';
 import Link, { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate';
+import { JJIconGallery } from '@/jujiu-ui-components/ipc/icons';
 
 export function LanguageChanger() {
 	const locale = useLocale();
@@ -234,6 +235,11 @@ export function PCSideBar() {
 			icon: <System />,
 			label: t('系统设置'),
 			href: '/settings/',
+		},
+		{
+			icon: <JJIconGallery />,
+			label: t('相册'),
+			href: '/gallery/',
 		},
 	];
 
