@@ -444,7 +444,7 @@ function VideoPlayer({ ...prop }) {
 								<Button icon={<FormClose />} tip={t('关闭')} />
 							</Box>
 						</Stack>
-						<Box direction='row' justify='end' gap='small' pad={{ horizontal: 'small' }}>
+						<Box direction='row' justify='center' gap='small' pad={{ horizontal: 'small' }}>
 							<ScreenCopyControl showTitle={false} />
 							<RecordControl showTitle={false} />
 							<ChatControl showTitle={false} />
