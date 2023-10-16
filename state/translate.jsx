@@ -8,3 +8,4 @@ export { useRouter, usePathname, useLocale };
 export function useJuJiuT() {
 	return useTranslations('Index');
 }
+export { Link };
