@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import {
 	Text,
 	Box,
@@ -59,7 +59,13 @@ import { DeviceSettings } from '@/jujiu-ui-components/ipc/device/settings';
 import { JuJiuTagFromShared, JuJiuTagSharing } from '@/jujiu-ui-components/core/core-tag';
 import { IpcLogo } from '@/jujiu-ui-components/ipc/about/brand';
 import Link, { useRouter, usePathname, useLocale, useJuJiuT } from '@/state/translate';
-import { JJIconCloudUpload, JJIconGallery } from '@/jujiu-ui-components/ipc/icons';
+import {
+	JJIconCloudUpload,
+	JJIconGallery,
+	JJIconPersonFeedback,
+	JJIconShareRounded,
+	JJIconUpgrade,
+} from '@/jujiu-ui-components/ipc/icons';
 
 export function LanguageChanger() {
 	const locale = useLocale();
@@ -223,9 +229,8 @@ function FlexLinkListItem({ label, shrink, ...props }) {
 	}
 }
 
-export function PCSideBar() {
-	const t = useJuJiuT();
-	const PCSideBarData = [
+function makePCSideBarItems(t) {
+	return [
 		{
 			icon: <Webcam />,
 			label: t('实时视频'),
@@ -246,8 +251,27 @@ export function PCSideBar() {
 			label: t('云存储'),
 			href: '/cloud-storage/',
 		},
+		{
+			icon: <JJIconUpgrade />,
+			label: t('固件升级'),
+			href: '/ota/',
+		},
+		{
+			icon: <JJIconShareRounded />,
+			label: t('我的分享'),
+			href: '/sharing/',
+		},
+		{
+			icon: <JJIconPersonFeedback size='24' />,
+			label: t('帮助与反馈'),
+			href: '/help-feedback/',
+		},
 	];
+}
 
+export function PCSideBar() {
+	const t = useJuJiuT();
+	const PCSideBarData = useMemo(() => makePCSideBarItems(t), [t]);
 	const [shrink, setShrink] = useState(true);
 	const pathname = usePathname();
 
