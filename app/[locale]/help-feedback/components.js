@@ -7,7 +7,7 @@ import {
 	HelpFeedbackMenu,
 } from '@/jujiu-ui-components/ipc/help-feedback';
 import { useJuJiuT } from '@/state/translate';
-import { Box, Heading, Nav } from 'grommet';
+import { Box, Heading, Main, Nav } from 'grommet';
 
 function getUsername(datum) {
 	return datum?.user?.nickname ?? '';
@@ -29,7 +29,7 @@ function HelpFeedbackPage({ list }) {
 	const t = useJuJiuT();
 
 	return (
-		<Box fill>
+		<Main flex={true} background={'background'} pad='medium'>
 			<HorizontalNoflexBox>
 				<Box direction='row' justify='between'>
 					<Heading level='2'>{`${t('帮助与反馈')} - ${t('全部问题')}`}</Heading>
@@ -45,7 +45,7 @@ function HelpFeedbackPage({ list }) {
 			<HorizontalNoflexBox>
 				<HelpFeedbackPagination numberItems={97} page={1} step={20} />
 			</HorizontalNoflexBox>
-		</Box>
+		</Main>
 	);
 }
 

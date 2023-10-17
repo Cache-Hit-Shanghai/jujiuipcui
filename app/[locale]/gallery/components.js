@@ -9,7 +9,7 @@ import {
 	VideoView,
 } from '@/jujiu-ui-components/ipc/gallery';
 import { useJuJiuT } from '@/state/translate';
-import { Box, Heading } from 'grommet';
+import { Box, Heading, Main } from 'grommet';
 import { useState } from 'react';
 
 const IMAGE_URL = 'https://pic35.photophoto.cn/20150511/0034034892281415_b.jpg';
@@ -38,10 +38,10 @@ function GalleryPage() {
 	const t = useJuJiuT();
 
 	return (
-		<Box fill>
+		<Main flex={true} pad='medium'>
 			<Heading level='2'>{`${t('相册')}（${t('剩余容量')}: ${capacity}）`}</Heading>
 			<Box flex={{ grow: 10, shrink: 1 }} overflow={{ vertical: 'scroll' }}>
-				<Box width='100%' flex={false} gap='small'>
+				<Box width='100%' flex={false} gap='small' pad={{ vertical: 'small' }}>
 					<DateCard title='2023/01/01' elWidth={ELEMENT_WIDTH}>
 						{Array.from({ length: 60 }, (v, i) => (
 							<LinkBoxImage
@@ -72,7 +72,7 @@ function GalleryPage() {
 				</Box>
 			</Box>
 			<MediaLayer {...mediaLayer} close={() => setMediaLayer({ isOpen: false })} />
-		</Box>
+		</Main>
 	);
 }
 

@@ -1,10 +1,10 @@
 import { OtaPage } from './components';
-import { Box } from 'grommet';
+import { Box, Main } from 'grommet';
 
 export default function Page() {
 	return (
-		<Box fill overflow={{ vertical: 'scroll' }}>
+		<Main flex={true} overflow={{ vertical: 'scroll' }} background={'background'} pad='medium'>
 			<OtaPage />
-		</Box>
+		</Main>
 	);
 }

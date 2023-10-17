@@ -1,15 +1,13 @@
 import { CloudStorageCard, CloudStorageHead } from '@/jujiu-ui-components/ipc/cloud-storage';
-import { Box } from 'grommet';
+import { Box, Main } from 'grommet';
 
 export default function Page() {
 	const devices = Array.from({ length: 20 }, (v, k) => ({ usn: k.toString(), desc: 'test' + k.toString() }));
 	const vipData = { 0: true };
 
 	return (
-		<Box fill background={'white'} pad='medium' gap='small'>
-			<Box flex={false} fill='horizontal'>
-				<CloudStorageHead />
-			</Box>
+		<Main flex={true} background={'background'} pad='medium' gap='small'>
+			<CloudStorageHead />
 			<Box fill='horizontal' flex={true} overflow={{ vertical: 'scroll' }}>
 				<Box fill='horizontal' flex={false} gap='small' pad={{ vertical: 'small' }}>
 					{devices.map((device) => (
@@ -22,6 +20,6 @@ export default function Page() {
 					))}
 				</Box>
 			</Box>
-		</Box>
+		</Main>
 	);
 }
