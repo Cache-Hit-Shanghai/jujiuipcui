@@ -66,6 +66,7 @@ import {
 	JJIconShareRounded,
 	JJIconUpgrade,
 } from '@/jujiu-ui-components/ipc/icons';
+import { NextIntlClientProvider } from 'next-intl';
 
 export function LanguageChanger() {
 	const locale = useLocale();
@@ -519,3 +520,18 @@ export function VideoGrid() {
 		</Main>
 	);
 }
+
+function getMessageFallback({ namespace, key, error }) {
+	if (namespace) return key;
+	return key.slice(key.indexOf('.') + 1);
+}
+
+function IntlProvider({ children, ...props }) {
+	return (
+		<NextIntlClientProvider {...{ getMessageFallback }} {...props}>
+			{children}
+		</NextIntlClientProvider>
+	);
+}
+
+export { IntlProvider };
