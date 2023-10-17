@@ -8,7 +8,8 @@ import {
 	LinkBoxVideo,
 	VideoView,
 } from '@/jujiu-ui-components/ipc/gallery';
-import { Box } from 'grommet';
+import { useJuJiuT } from '@/state/translate';
+import { Box, Heading } from 'grommet';
 import { useState } from 'react';
 
 const IMAGE_URL = 'https://pic35.photophoto.cn/20150511/0034034892281415_b.jpg';
@@ -33,37 +34,42 @@ function MediaLayer({ isOpen, type, url, close }) {
 
 function GalleryPage() {
 	const [mediaLayer, setMediaLayer] = useState({ isOpen: false });
+	const capacity = '381.67M';
+	const t = useJuJiuT();
 
 	return (
-		<Box fill overflow={{ vertical: 'scroll' }}>
-			<Box width='100%' flex={false} gap='small'>
-				<DateCard title='2023/01/01' elWidth={ELEMENT_WIDTH}>
-					{Array.from({ length: 60 }, (v, i) => (
-						<LinkBoxImage
-							key={i}
-							url={IMAGE_URL}
-							onClick={() => setMediaLayer({ url: IMAGE_URL, type: 'image', isOpen: true })}
-						/>
-					))}
-				</DateCard>
-				<DateCard title='2023/01/02' elWidth={ELEMENT_WIDTH}>
-					{Array.from({ length: 30 }, (v, i) => (
-						<LinkBoxVideo
-							key={i}
-							url={IMAGE_URL}
-							onClick={() => setMediaLayer({ url: IMAGE_URL, type: 'video', isOpen: true })}
-						/>
-					))}
-				</DateCard>
-				<DateCard title='2023/01/03' elWidth={ELEMENT_WIDTH}>
-					{Array.from({ length: 30 }, (v, i) => (
-						<LinkBoxVideo
-							key={i}
-							url={IMAGE_URL}
-							onClick={() => setMediaLayer({ url: IMAGE_URL, type: 'video', isOpen: true })}
-						/>
-					))}
-				</DateCard>
+		<Box fill>
+			<Heading level='2'>{`${t('相册')}（${t('剩余容量')}: ${capacity}）`}</Heading>
+			<Box flex={{ grow: 10, shrink: 1 }} overflow={{ vertical: 'scroll' }}>
+				<Box width='100%' flex={false} gap='small'>
+					<DateCard title='2023/01/01' elWidth={ELEMENT_WIDTH}>
+						{Array.from({ length: 60 }, (v, i) => (
+							<LinkBoxImage
+								key={i}
+								url={IMAGE_URL}
+								onClick={() => setMediaLayer({ url: IMAGE_URL, type: 'image', isOpen: true })}
+							/>
+						))}
+					</DateCard>
+					<DateCard title='2023/01/02' elWidth={ELEMENT_WIDTH}>
+						{Array.from({ length: 30 }, (v, i) => (
+							<LinkBoxVideo
+								key={i}
+								url={IMAGE_URL}
+								onClick={() => setMediaLayer({ url: IMAGE_URL, type: 'video', isOpen: true })}
+							/>
+						))}
+					</DateCard>
+					<DateCard title='2023/01/03' elWidth={ELEMENT_WIDTH}>
+						{Array.from({ length: 30 }, (v, i) => (
+							<LinkBoxVideo
+								key={i}
+								url={IMAGE_URL}
+								onClick={() => setMediaLayer({ url: IMAGE_URL, type: 'video', isOpen: true })}
+							/>
+						))}
+					</DateCard>
+				</Box>
 			</Box>
 			<MediaLayer {...mediaLayer} close={() => setMediaLayer({ isOpen: false })} />
 		</Box>
