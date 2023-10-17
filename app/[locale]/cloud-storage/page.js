@@ -1,4 +1,5 @@
 import { CloudStorageCard, CloudStorageHead } from '@/jujiu-ui-components/ipc/cloud-storage';
+import { IpcMain } from '@/jujiu-ui-components/ipc/common';
 import { Box, Main } from 'grommet';
 
 export default function Page() {
@@ -6,7 +7,7 @@ export default function Page() {
 	const vipData = { 0: true };
 
 	return (
-		<Main flex={true} background={'background'} pad='medium' gap='small'>
+		<IpcMain gap='small'>
 			<CloudStorageHead />
 			<Box fill='horizontal' flex={true} overflow={{ vertical: 'scroll' }}>
 				<Box fill='horizontal' flex={false} gap='small' pad={{ vertical: 'small' }}>
@@ -20,6 +21,6 @@ export default function Page() {
 					))}
 				</Box>
 			</Box>
-		</Main>
+		</IpcMain>
 	);
 }

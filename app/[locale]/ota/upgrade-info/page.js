@@ -1,4 +1,5 @@
 import { IconBack } from '@/jujiu-ui-components/core';
+import { IpcMain } from '@/jujiu-ui-components/ipc/common';
 import { OtaUpgradeInfo } from '@/jujiu-ui-components/ipc/ota';
 import { Box, Heading } from 'grommet';
 
@@ -11,12 +12,12 @@ export default function Page() {
 	};
 
 	return (
-		<Box fill>
+		<IpcMain>
 			<Box direction='row' gap='small'>
 				<IconBack />
 				<Heading level='2'>固件升级信息 - {device.desc}</Heading>
 			</Box>
 			<OtaUpgradeInfo {...{ device, info }} />
-		</Box>
+		</IpcMain>
 	);
 }

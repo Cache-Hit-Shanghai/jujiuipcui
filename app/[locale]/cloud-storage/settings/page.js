@@ -4,6 +4,7 @@ import {
 	CloudStorageSets,
 	CloudStorageTitle,
 } from '@/jujiu-ui-components/ipc/cloud-storage';
+import { IpcMain } from '@/jujiu-ui-components/ipc/common';
 import { Box } from 'grommet';
 
 export default function Page() {
@@ -14,7 +15,7 @@ export default function Page() {
 	}));
 
 	return (
-		<Box fill background={'white'} pad='medium' gap='small'>
+		<IpcMain gap='small'>
 			<Box width='100%' gap='small' flex={false}>
 				<Box direction='row' gap='small'>
 					<IconBack />
@@ -27,6 +28,6 @@ export default function Page() {
 					<CloudStorageSets list={sets} />
 				</Box>
 			</Box>
-		</Box>
+		</IpcMain>
 	);
 }

@@ -1,3 +1,4 @@
+import { IpcMain } from '@/jujiu-ui-components/ipc/common';
 import { SharedDeviceList, SharingDeviceList, SharingTabs } from '@/jujiu-ui-components/ipc/sharing';
 import { Box, Main } from 'grommet';
 
@@ -17,7 +18,7 @@ export default function Page() {
 	const sharedDevices = sharingDevices;
 
 	return (
-		<Main flex={true} background='background' pad='medium'>
+		<IpcMain>
 			<SharingTabs
 				sharing={
 					<Container>
@@ -30,6 +31,6 @@ export default function Page() {
 					</Container>
 				}
 			/>
-		</Main>
+		</IpcMain>
 	);
 }

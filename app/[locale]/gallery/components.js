@@ -1,6 +1,7 @@
 'use client';
 
 import { JuJiuLayer } from '@/jujiu-ui-components/core';
+import { IpcMain } from '@/jujiu-ui-components/ipc/common';
 import {
 	DateCard,
 	ImageView,
@@ -38,9 +39,9 @@ function GalleryPage() {
 	const t = useJuJiuT();
 
 	return (
-		<Main flex={true} pad='medium'>
+		<IpcMain background='none'>
 			<Heading level='2'>{`${t('相册')}（${t('剩余容量')}: ${capacity}）`}</Heading>
-			<Box flex={{ grow: 10, shrink: 1 }} overflow={{ vertical: 'scroll' }}>
+			<Box flex={true} overflow={{ vertical: 'scroll' }}>
 				<Box width='100%' flex={false} gap='small' pad={{ vertical: 'small' }}>
 					<DateCard title='2023/01/01' elWidth={ELEMENT_WIDTH}>
 						{Array.from({ length: 60 }, (v, i) => (
@@ -72,7 +73,7 @@ function GalleryPage() {
 				</Box>
 			</Box>
 			<MediaLayer {...mediaLayer} close={() => setMediaLayer({ isOpen: false })} />
-		</Main>
+		</IpcMain>
 	);
 }
 
