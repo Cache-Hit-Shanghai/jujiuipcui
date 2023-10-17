@@ -42,7 +42,7 @@ function GalleryPage() {
 		<IpcMain background='none'>
 			<Heading level='2'>{`${t('相册')}（${t('剩余容量')}: ${capacity}）`}</Heading>
 			<Box flex={true} overflow={{ vertical: 'scroll' }}>
-				<Box width='100%' flex={false} gap='small' pad={{ vertical: 'small' }}>
+				<Box width='100%' flex={false} gap='small' pad={'small'}>
 					<DateCard title='2023/01/01' elWidth={ELEMENT_WIDTH}>
 						{Array.from({ length: 60 }, (v, i) => (
 							<LinkBoxImage
