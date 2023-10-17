@@ -278,11 +278,13 @@ export function PCSideBar() {
 	return (
 		<Box background='background' flex={false} pad='none'>
 			<Nav gap='small' flex={{ grow: 1, shrink: 1 }} overflow='auto' pad={{ top: 'small' }}>
-				{PCSideBarData.map((datum) => (
-					<Box key={datum.href} background={pathname === datum.href ? 'control' : 'transparent'}>
-						<FlexLinkListItem icon={datum.icon} label={datum.label} href={datum.href} shrink={shrink} />
-					</Box>
-				))}
+				<Box fill='horizontal' flex={false}>
+					{PCSideBarData.map((datum) => (
+						<Box key={datum.href} background={pathname === datum.href ? 'control' : 'transparent'}>
+							<FlexLinkListItem icon={datum.icon} label={datum.label} href={datum.href} shrink={shrink} />
+						</Box>
+					))}
+				</Box>
 			</Nav>
 			<Box flex={false} border='top' />
 			<Box flex={false} pad='small' direction='row' justify='end'>
