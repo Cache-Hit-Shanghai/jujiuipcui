@@ -10,22 +10,23 @@ function Container({ children }) {
 }
 
 export default function Page() {
-	const devices = Array.from({ length: 30 }, (v, i) => {
+	const sharingDevices = Array.from({ length: 30 }, (v, i) => {
 		const _id = i.toString();
-		return { _id, usn: _id, shareCount: 4, desc: 'test' + _id, sharedBy: 'somebody' };
+		return { _id, usn: _id, shareCount: 3, desc: 'test' + _id, sharedBy: 'somebody' };
 	});
+	const sharedDevices = sharingDevices;
 
 	return (
 		<Box fill>
 			<SharingTabs
 				sharing={
 					<Container>
-						<SharingDeviceList data={devices} />
+						<SharingDeviceList data={sharingDevices} />
 					</Container>
 				}
 				shared={
 					<Container>
-						<SharedDeviceList data={devices} />
+						<SharedDeviceList data={sharedDevices} />
 					</Container>
 				}
 			/>

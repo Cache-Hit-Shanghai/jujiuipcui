@@ -6,17 +6,21 @@ export default function Page() {
 	const vipData = { 0: true };
 
 	return (
-		<Box fill background={'white'} overflow={{ vertical: 'scroll' }} pad='medium'>
-			<Box width='100%' gap='small' flex={false}>
+		<Box fill background={'white'} pad='medium' gap='small'>
+			<Box flex={false} fill='horizontal'>
 				<CloudStorageHead />
-				{devices.map((device) => (
-					<CloudStorageCard
-						key={device.usn}
-						hasVip={vipData[device.usn]}
-						expireAt={'2024-01-01'}
-						{...{ device }}
-					/>
-				))}
+			</Box>
+			<Box fill='horizontal' flex={true} overflow={{ vertical: 'scroll' }}>
+				<Box fill='horizontal' flex={false} gap='small' pad={{ vertical: 'small' }}>
+					{devices.map((device) => (
+						<CloudStorageCard
+							key={device.usn}
+							hasVip={vipData[device.usn]}
+							expireAt={'2024-01-01'}
+							{...{ device }}
+						/>
+					))}
+				</Box>
 			</Box>
 		</Box>
 	);
