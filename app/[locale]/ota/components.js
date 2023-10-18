@@ -1,22 +1,16 @@
 'use client';
 
-import { OtaDeviceList } from '@/jujiu-ui-components/ipc/ota';
+import { OtaDeviceCard, OtaDeviceList } from '@/jujiu-ui-components/ipc/ota';
+import { Grid } from 'grommet';
 
-function OtaPage() {
-	const list = Array.from({ length: 30 }, (v, i) => {
-		const _id = i.toString();
-		return {
-			_id,
-			desc: 'test' + _id,
-			usn: _id,
-			currentVersion: '1.0.0',
-			upgradeVersion: '2.0.0',
-			upgradeSize: 0,
-			updateLog: 'this is update log',
-		};
-	});
-
-	return <OtaDeviceList parseSize={() => '5MB'} data={list} />;
+function OtaContent({ devices = [] }) {
+	return (
+		<Grid columns='medium' rows='small' gap='small'>
+			{devices.map(({ _id, desc, usn, ...otaInfo }) => (
+				<OtaDeviceCard key={usn} device={{ _id, desc, usn }} parseSize={() => '5MB'} {...{ otaInfo }} />
+			))}
+		</Grid>
+	);
 }
 
-export { OtaPage };
+export { OtaContent };

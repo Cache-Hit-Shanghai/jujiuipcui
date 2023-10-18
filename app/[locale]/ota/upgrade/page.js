@@ -15,7 +15,7 @@ export default function Page() {
 				<Heading level='2'>固件升级</Heading>
 			</Box>
 			<OtaUpgradeView {...{ device, progress, maxProgress }}>
-				<ButtonLink href='/ota' label='返回列表' />
+				<ButtonLink href='/ota' label='返回列表' primary={true} />
 			</OtaUpgradeView>
 		</IpcMain>
 	);
