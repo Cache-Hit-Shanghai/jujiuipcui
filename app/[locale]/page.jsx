@@ -1,10 +1,5 @@
-import { CameraList, VideoGrid } from './components';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
-	return (
-		<>
-			<CameraList />
-			<VideoGrid />
-		</>
-	);
+	redirect('/cn/stream');
 }
