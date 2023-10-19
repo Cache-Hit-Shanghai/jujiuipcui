@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
-import GrommetRoot from '@/jujiu-ui-components/layout/grommet';
 import { IntlProvider, MainFrame } from './components';
+import { UiPack } from '@/jujiu-ui-components/layout/ui';
 
 export function generateStaticParams() {
 	return [{ locale: 'en' }, { locale: 'cn' }];
@@ -18,9 +18,9 @@ export default async function RootLayout({ children, params: { locale } }) {
 		<html lang={locale}>
 			<body>
 				<IntlProvider {...{ locale, messages }}>
-					<GrommetRoot themeMode='light'>
+					<UiPack>
 						<MainFrame>{children}</MainFrame>
-					</GrommetRoot>
+					</UiPack>
 				</IntlProvider>
 			</body>
 		</html>

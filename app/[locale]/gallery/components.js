@@ -35,7 +35,7 @@ function MediaLayer({ isOpen, type, url, close }) {
 
 function GalleryPage() {
 	const [mediaLayer, setMediaLayer] = useState({ isOpen: false });
-	const capacity = '381.67M';
+	const capacity = '381.67MB';
 	const t = useJuJiuT();
 
 	return (
