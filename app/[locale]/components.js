@@ -70,7 +70,7 @@ export function PCNav() {
 	const [stage, setStage] = useState(0);
 
 	return (
-		<Nav direction='row' background='background' pad='small' justify='between' flex={false}>
+		<Nav direction='row' background='background' pad='small' align='center' justify='between' flex={false}>
 			<PCLogo />
 			<Box direction='row' gap='small' align='center'>
 				<LanguageChanger />
