@@ -247,26 +247,36 @@ function RecordControlDemo({ showTitle, target }) {
 	);
 }
 
+function toggleFullScreen(element) {
+	if (document.fullscreenElement) {
+		document.exitFullscreen();
+	} else {
+		element.requestFullscreen();
+	}
+}
+
 function VideoPlayer({ ...prop }) {
 	const t = useJuJiuT();
 	const ref = useRef();
-	const [show, setShow] = useState(true);
+	const [show, setShow] = useState(false);
 
 	return (
-		<Box fill background='black' {...prop} ref={ref}>
-			<Box fill focusIndicator={false} hoverIndicator={false} onClick={() => setShow(!show)}>
-				<Video focusIndicator={false} controls={false} />
+		<Box fill background='black' ref={ref} style={{ position: 'relative' }} {...prop}>
+			<Video fit='contain' controls={false} onClick={() => setShow(!show)} style={{ zIndex: 0 }} />
+			<Box style={{ position: 'absolute', visibility: show ? 'visible' : 'hidden' }}>
+				<Text margin='small'>云探1</Text>
 			</Box>
-			<Layer
-				plain
-				modal={false}
-				animation='fadeIn'
-				position='bottom'
-				responsive={false}
-				target={ref.current}
-				style={{ minHeight: 0, visibility: show ? 'visible' : 'hidden' }}
+			<Box
+				style={{
+					position: 'absolute',
+					bottom: 0,
+					left: 0,
+					right: 0,
+					margin: 'auto',
+					visibility: show ? 'visible' : 'hidden',
+				}}
 			>
-				<Box direction='row' justify='center' gap='small' background={{ color: 'black', opacity: 'medium' }}>
+				<Box direction='row' justify='center' gap='small'>
 					<ScreenCopyControl showTitle={false} />
 					<RecordControlDemo showTitle={false} target={ref} />
 					<ChatControl showTitle={false} />
@@ -274,35 +284,12 @@ function VideoPlayer({ ...prop }) {
 					<PanLayer target={ref} />
 					<ResolutionControl showTitle={false} />
 					<ZoomControl showTitle={false} />
-					<Button icon={<Expand />} tip={t('全屏')} />
+					<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(ref.current)} />
 				</Box>
-			</Layer>
-			<Layer
-				plain
-				modal={false}
-				animation='fadeIn'
-				position='top-right'
-				responsive={false}
-				target={ref.current}
-				style={{ minHeight: 0, visibility: show ? 'visible' : 'hidden' }}
-			>
-				<Box direction='row' justify='center' gap='small' background={{ color: 'black', opacity: 'medium' }}>
-					<Button icon={<FormClose />} tip={t('关闭')} />
-				</Box>
-			</Layer>
-			<Layer
-				plain
-				modal={false}
-				animation='fadeIn'
-				position='top-left'
-				responsive={false}
-				target={ref.current}
-				style={{ minHeight: 0, visibility: show ? 'visible' : 'hidden' }}
-			>
-				<Box direction='row' justify='center' gap='small' background={{ color: 'black', opacity: 'medium' }}>
-					<Text margin='small'>云探1</Text>
-				</Box>
-			</Layer>
+			</Box>
+			<Box style={{ position: 'absolute', right: 0, visibility: show ? 'visible' : 'hidden' }}>
+				<Button icon={<FormClose />} tip={t('关闭')} />
+			</Box>
 		</Box>
 	);
 }
