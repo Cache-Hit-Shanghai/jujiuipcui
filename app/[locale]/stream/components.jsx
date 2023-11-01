@@ -246,11 +246,13 @@ function RecordControlDemo({ showTitle }) {
 	);
 }
 
-function toggleFullScreen(element) {
+function toggleFullScreen(setFullScreen) {
 	if (document.fullscreenElement) {
 		document.exitFullscreen();
+		setFullScreen(false);
 	} else {
-		element.requestFullscreen();
+		document.documentElement.requestFullscreen();
+		setFullScreen(true);
 	}
 }
 
@@ -258,9 +260,20 @@ function VideoPlayer({ ...prop }) {
 	const t = useJuJiuT();
 	const ref = useRef();
 	const [show, setShow] = useState(true);
+	const [fullScreen, setFullScreen] = useState(false);
+	const normalStyle = { position: 'relative', transform: 'scale(1)' };
+	const fullScreenStyle = {
+		position: 'fixed',
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		zIndex: 1,
+		transform: 'scale(1)',
+	};
 
 	return (
-		<Box fill background='black' ref={ref} style={{ position: 'relative', transform: 'scale(1)' }} {...prop}>
+		<Box fill background='black' ref={ref} style={fullScreen ? fullScreenStyle : normalStyle} {...prop}>
 			<Video fit='contain' controls={false} onClick={() => setShow(!show)} style={{ zIndex: 0 }} />
 			<Box style={{ position: 'absolute', visibility: show ? 'visible' : 'hidden' }}>
 				<Text margin='small'>云探1</Text>
@@ -284,7 +297,7 @@ function VideoPlayer({ ...prop }) {
 				<PanLayer />
 				<ResolutionControl showTitle={false} />
 				<ZoomControl showTitle={false} />
-				<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(ref.current)} />
+				<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(setFullScreen)} />
 			</Box>
 			<Box style={{ position: 'absolute', right: 0, visibility: show ? 'visible' : 'hidden' }}>
 				<Button icon={<FormClose />} tip={t('关闭')} />
