@@ -272,7 +272,6 @@ function VideoPlayer({ ...prop }) {
 					bottom: 0,
 					left: 0,
 					right: 0,
-					margin: 'auto',
 					visibility: show ? 'visible' : 'hidden',
 				}}
 			>
