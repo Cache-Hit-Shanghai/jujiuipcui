@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import {
 	Text,
+	Tag,
 	Box,
 	Main,
 	Grid,
@@ -26,6 +27,7 @@ import {
 	Transaction,
 	ContactInfo,
 	ShareRounded,
+	RadialSelected,
 	CircleInformation,
 } from 'grommet-icons';
 import { SettingsOutline } from '@styled-icons/evaicons-outline/SettingsOutline';
@@ -211,36 +213,96 @@ export function CameraList() {
 	);
 }
 
+function RecordControlDemo({ showTitle, target }) {
+	const [recording, setRecording] = useState(false);
+
+	return (
+		<>
+			<RecordControl showTitle={showTitle} onClick={() => setRecording(!recording)} />
+			<Layer
+				plain
+				modal={false}
+				animation='fadeIn'
+				position='top'
+				responsive={false}
+				target={target?.current}
+				style={{ minHeight: 0, visibility: recording ? 'visible' : 'hidden' }}
+			>
+				<Box background={{ color: 'black', opacity: 'medium' }}>
+					<Tag
+						margin='small'
+						size='xsmall'
+						border={false}
+						background='status-critical'
+						value={
+							<Box direction='row' gap='small' align='center'>
+								<RadialSelected size='small' />
+								<Text size='xsmall'>0:41</Text>
+							</Box>
+						}
+					/>
+				</Box>
+			</Layer>
+		</>
+	);
+}
+
 function VideoPlayer({ ...prop }) {
 	const t = useJuJiuT();
 	const ref = useRef();
+	const [show, setShow] = useState(true);
+
 	return (
 		<Box fill background='black' {...prop} ref={ref}>
-			<Stack fill interactiveChild='last'>
-				<Video controls={false} />
-				<Stack fill>
-					<Box fill justify='between'>
-						<Stack>
-							<Box pad='small' direction='row' justify='center'>
-								<Text>云探1</Text>
-							</Box>
-							<Box direction='row' justify='end'>
-								<Button icon={<FormClose />} tip={t('关闭')} />
-							</Box>
-						</Stack>
-						<Box direction='row' justify='center' gap='small' pad={{ horizontal: 'small' }}>
-							<ScreenCopyControl showTitle={false} />
-							<RecordControl showTitle={false} />
-							<ChatControl showTitle={false} />
-							<MuteControl showTitle={false} />
-							<PanLayer target={ref} />
-							<ResolutionControl showTitle={false} />
-							<ZoomControl showTitle={false} />
-							<Button icon={<Expand />} tip={t('全屏')} />
-						</Box>
-					</Box>
-				</Stack>
-			</Stack>
+			<Box fill focusIndicator={false} hoverIndicator={false} onClick={() => setShow(!show)}>
+				<Video focusIndicator={false} controls={false} />
+			</Box>
+			<Layer
+				plain
+				modal={false}
+				animation='fadeIn'
+				position='bottom'
+				responsive={false}
+				target={ref.current}
+				style={{ minHeight: 0, visibility: show ? 'visible' : 'hidden' }}
+			>
+				<Box direction='row' justify='center' gap='small' background={{ color: 'black', opacity: 'medium' }}>
+					<ScreenCopyControl showTitle={false} />
+					<RecordControlDemo showTitle={false} target={ref} />
+					<ChatControl showTitle={false} />
+					<MuteControl showTitle={false} />
+					<PanLayer target={ref} />
+					<ResolutionControl showTitle={false} />
+					<ZoomControl showTitle={false} />
+					<Button icon={<Expand />} tip={t('全屏')} />
+				</Box>
+			</Layer>
+			<Layer
+				plain
+				modal={false}
+				animation='fadeIn'
+				position='top-right'
+				responsive={false}
+				target={ref.current}
+				style={{ minHeight: 0, visibility: show ? 'visible' : 'hidden' }}
+			>
+				<Box direction='row' justify='center' gap='small' background={{ color: 'black', opacity: 'medium' }}>
+					<Button icon={<FormClose />} tip={t('关闭')} />
+				</Box>
+			</Layer>
+			<Layer
+				plain
+				modal={false}
+				animation='fadeIn'
+				position='top-left'
+				responsive={false}
+				target={ref.current}
+				style={{ minHeight: 0, visibility: show ? 'visible' : 'hidden' }}
+			>
+				<Box direction='row' justify='center' gap='small' background={{ color: 'black', opacity: 'medium' }}>
+					<Text margin='small'>云探1</Text>
+				</Box>
+			</Layer>
 		</Box>
 	);
 }
