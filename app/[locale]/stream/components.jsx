@@ -261,7 +261,7 @@ function VideoPlayer({ ...prop }) {
 	const [show, setShow] = useState(true);
 
 	return (
-		<Box fill background='black' ref={ref} style={{ position: 'relative' }} {...prop}>
+		<Box fill background='black' ref={ref} style={{ position: 'relative', transform: 'scale(1)' }} {...prop}>
 			<Video fit='contain' controls={false} onClick={() => setShow(!show)} style={{ zIndex: 0 }} />
 			<Box style={{ position: 'absolute', visibility: show ? 'visible' : 'hidden' }}>
 				<Text margin='small'>云探1</Text>
