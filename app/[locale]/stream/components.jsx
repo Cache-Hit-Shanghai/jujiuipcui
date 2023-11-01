@@ -258,7 +258,7 @@ function toggleFullScreen(element) {
 function VideoPlayer({ ...prop }) {
 	const t = useJuJiuT();
 	const ref = useRef();
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState(true);
 
 	return (
 		<Box fill background='black' ref={ref} style={{ position: 'relative' }} {...prop}>
