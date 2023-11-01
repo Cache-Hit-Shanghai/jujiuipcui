@@ -213,36 +213,35 @@ export function CameraList() {
 	);
 }
 
-function RecordControlDemo({ showTitle, target }) {
+function RecordControlDemo({ showTitle }) {
 	const [recording, setRecording] = useState(false);
 
 	return (
 		<>
 			<RecordControl showTitle={showTitle} onClick={() => setRecording(!recording)} />
-			<Layer
-				plain
-				modal={false}
-				animation='fadeIn'
-				position='top'
-				responsive={false}
-				target={target?.current}
-				style={{ minHeight: 0, visibility: recording ? 'visible' : 'hidden' }}
+			<Box
+				align='center'
+				style={{
+					position: 'fixed',
+					top: 0,
+					left: 0,
+					right: 0,
+					visibility: recording ? 'visible' : 'hidden',
+				}}
 			>
-				<Box background={{ color: 'black', opacity: 'medium' }}>
-					<Tag
-						margin='small'
-						size='xsmall'
-						border={false}
-						background='status-critical'
-						value={
-							<Box direction='row' gap='small' align='center'>
-								<RadialSelected size='small' />
-								<Text size='xsmall'>0:41</Text>
-							</Box>
-						}
-					/>
-				</Box>
-			</Layer>
+				<Tag
+					margin='small'
+					size='xsmall'
+					border={false}
+					background='status-critical'
+					value={
+						<Box direction='row' gap='small' align='center'>
+							<RadialSelected size='small' />
+							<Text size='xsmall'>0:41</Text>
+						</Box>
+					}
+				/>
+			</Box>
 		</>
 	);
 }
@@ -267,6 +266,9 @@ function VideoPlayer({ ...prop }) {
 				<Text margin='small'>云探1</Text>
 			</Box>
 			<Box
+				direction='row'
+				justify='center'
+				gap='small'
 				style={{
 					position: 'absolute',
 					bottom: 0,
@@ -275,16 +277,14 @@ function VideoPlayer({ ...prop }) {
 					visibility: show ? 'visible' : 'hidden',
 				}}
 			>
-				<Box direction='row' justify='center' gap='small'>
-					<ScreenCopyControl showTitle={false} />
-					<RecordControlDemo showTitle={false} target={ref} />
-					<ChatControl showTitle={false} />
-					<MuteControl showTitle={false} />
-					<PanLayer target={ref} />
-					<ResolutionControl showTitle={false} />
-					<ZoomControl showTitle={false} />
-					<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(ref.current)} />
-				</Box>
+				<ScreenCopyControl showTitle={false} />
+				<RecordControlDemo showTitle={false} target={ref} />
+				<ChatControl showTitle={false} />
+				<MuteControl showTitle={false} />
+				<PanLayer target={ref} />
+				<ResolutionControl showTitle={false} />
+				<ZoomControl showTitle={false} />
+				<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(ref.current)} />
 			</Box>
 			<Box style={{ position: 'absolute', right: 0, visibility: show ? 'visible' : 'hidden' }}>
 				<Button icon={<FormClose />} tip={t('关闭')} />
