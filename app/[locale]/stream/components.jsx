@@ -247,12 +247,16 @@ function RecordControlDemo({ showTitle }) {
 }
 
 function toggleFullScreen(setFullScreen) {
+	function fullScreenChangeHandler() {
+		setFullScreen(!!document.fullscreenElement);
+	}
+
 	if (document.fullscreenElement) {
 		document.exitFullscreen();
-		setFullScreen(false);
+		document.removeEventListener('fullscreenchange', fullScreenChangeHandler);
 	} else {
+		document.addEventListener('fullscreenchange', fullScreenChangeHandler);
 		document.documentElement.requestFullscreen();
-		setFullScreen(true);
 	}
 }
 
