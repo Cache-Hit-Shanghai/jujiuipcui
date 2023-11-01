@@ -278,10 +278,10 @@ function VideoPlayer({ ...prop }) {
 				}}
 			>
 				<ScreenCopyControl showTitle={false} />
-				<RecordControlDemo showTitle={false} target={ref} />
+				<RecordControlDemo showTitle={false} />
 				<ChatControl showTitle={false} />
 				<MuteControl showTitle={false} />
-				<PanLayer target={ref} />
+				<PanLayer />
 				<ResolutionControl showTitle={false} />
 				<ZoomControl showTitle={false} />
 				<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(ref.current)} />
