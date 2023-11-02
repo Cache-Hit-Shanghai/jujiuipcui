@@ -36,7 +36,7 @@ import {
 	ChatControl,
 	MuteControl,
 	RecordControl,
-	PanLayer,
+	PanControl,
 	ResolutionControl,
 	ZoomControl,
 } from '@/jujiu-ui-components/ipc/video/control';
@@ -218,7 +218,7 @@ function RecordControlDemo({ showTitle }) {
 
 	return (
 		<>
-			<RecordControl showTitle={showTitle} onClick={() => setRecording(!recording)} />
+			<RecordControl showTip showTitle={showTitle} onClick={() => setRecording(!recording)} />
 			<Box
 				align='center'
 				style={{
@@ -283,24 +283,38 @@ function VideoPlayer({ ...prop }) {
 				<Text margin='small'>云探1</Text>
 			</Box>
 			<Box
+				height='fit-content'
+				style={{
+					position: 'absolute',
+					left: 0,
+					top: 0,
+					bottom: 0,
+					margin: 'auto',
+					visibility: show ? 'visible' : 'hidden',
+				}}
+			>
+				<PanControl />
+			</Box>
+			<Box
 				direction='row'
 				justify='center'
 				gap='small'
+				width='fit-content'
 				style={{
 					position: 'absolute',
 					bottom: 0,
 					left: 0,
 					right: 0,
+					margin: 'auto',
 					visibility: show ? 'visible' : 'hidden',
 				}}
 			>
-				<ScreenCopyControl showTitle={false} />
+				<ScreenCopyControl showTip showTitle={false} />
 				<RecordControlDemo showTitle={false} />
-				<ChatControl showTitle={false} />
-				<MuteControl showTitle={false} />
-				<PanLayer />
-				<ResolutionControl showTitle={false} />
-				<ZoomControl showTitle={false} />
+				<ChatControl showTip showTitle={false} />
+				<MuteControl showTip showTitle={false} />
+				<ResolutionControl showTip showTitle={false} />
+				<ZoomControl showTip showTitle={false} />
 				<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(setFullScreen)} />
 			</Box>
 			<Box style={{ position: 'absolute', right: 0, visibility: show ? 'visible' : 'hidden' }}>
