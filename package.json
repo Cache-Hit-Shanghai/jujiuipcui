@@ -16,9 +16,10 @@
     "grommet": "^2.35.0-alpha.1",
     "grommet-icons": "^4.11.0",
     "next": "^14.0.1",
-    "next-intl": "^2.21.0",
+    "next-intl": "^2.22.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-idle-timer": "^5.7.2",
     "styled-components": "^6.1.0",
     "styled-icons": "^10.47.0"
   },

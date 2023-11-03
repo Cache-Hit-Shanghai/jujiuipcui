@@ -17,6 +17,7 @@ import {
 	Accordion,
 	AccordionPanel,
 } from 'grommet';
+import { useIdleTimer } from 'react-idle-timer';
 import {
 	More,
 	Robot,
@@ -264,6 +265,13 @@ function VideoPlayer({ ...prop }) {
 	const t = useJuJiuT();
 	const ref = useRef();
 	const [show, setShow] = useState(true);
+	const visibility = show ? 'visible' : 'hidden';
+	useIdleTimer({
+		onIdle: () => setShow(false),
+		onActive: () => setShow(true),
+		timeout: 5000,
+		element: ref.current,
+	});
 	const [fullScreen, setFullScreen] = useState(false);
 	const normalStyle = { position: 'relative', transform: 'scale(1)' };
 	const fullScreenStyle = {
@@ -277,9 +285,9 @@ function VideoPlayer({ ...prop }) {
 	};
 
 	return (
-		<Box fill background='black' ref={ref} style={fullScreen ? fullScreenStyle : normalStyle} {...prop}>
-			<Video fit='contain' controls={false} onClick={() => setShow(!show)} style={{ zIndex: 0 }} />
-			<Box style={{ position: 'absolute', visibility: show ? 'visible' : 'hidden' }}>
+		<Box fill background='black' style={fullScreen ? fullScreenStyle : normalStyle} {...prop} ref={ref}>
+			<Video fit='contain' controls={false} style={{ zIndex: 0 }} />
+			<Box style={{ position: 'absolute', visibility }}>
 				<Text margin='small'>云探1</Text>
 			</Box>
 			<Box
@@ -290,7 +298,7 @@ function VideoPlayer({ ...prop }) {
 					top: 0,
 					bottom: 0,
 					margin: 'auto',
-					visibility: show ? 'visible' : 'hidden',
+					visibility,
 				}}
 			>
 				<PanControl />
@@ -306,7 +314,7 @@ function VideoPlayer({ ...prop }) {
 					left: 0,
 					right: 0,
 					margin: 'auto',
-					visibility: show ? 'visible' : 'hidden',
+					visibility,
 				}}
 			>
 				<ScreenCopyControl showTip showTitle={false} />
@@ -317,7 +325,7 @@ function VideoPlayer({ ...prop }) {
 				<ZoomControl showTip showTitle={false} />
 				<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(setFullScreen)} />
 			</Box>
-			<Box style={{ position: 'absolute', right: 0, visibility: show ? 'visible' : 'hidden' }}>
+			<Box style={{ position: 'absolute', right: 0, visibility }}>
 				<Button icon={<FormClose />} tip={t('关闭')} />
 			</Box>
 		</Box>
