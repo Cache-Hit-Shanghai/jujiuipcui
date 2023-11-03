@@ -265,7 +265,9 @@ function VideoPlayer({ ...prop }) {
 	const t = useJuJiuT();
 	const ref = useRef();
 	const [show, setShow] = useState(true);
-	const visibility = show ? 'visible' : 'hidden';
+	const visibility = show
+		? { visibility: 'visible', opacity: 1, transition: 'opacity 0.5s linear' }
+		: { visibility: 'hidden', opacity: 0, transition: 'visibility 0s 0.5s, opacity 0.5s linear' };
 	useIdleTimer({
 		onIdle: () => setShow(false),
 		onActive: () => setShow(true),
@@ -287,7 +289,7 @@ function VideoPlayer({ ...prop }) {
 	return (
 		<Box fill background='black' style={fullScreen ? fullScreenStyle : normalStyle} {...prop} ref={ref}>
 			<Video fit='contain' controls={false} style={{ zIndex: 0 }} />
-			<Box style={{ position: 'absolute', visibility }}>
+			<Box style={{ position: 'absolute', ...visibility }}>
 				<Text margin='small'>云探1</Text>
 			</Box>
 			<Box
@@ -298,7 +300,7 @@ function VideoPlayer({ ...prop }) {
 					top: 0,
 					bottom: 0,
 					margin: 'auto',
-					visibility,
+					...visibility,
 				}}
 			>
 				<PanControl />
@@ -314,7 +316,7 @@ function VideoPlayer({ ...prop }) {
 					left: 0,
 					right: 0,
 					margin: 'auto',
-					visibility,
+					...visibility,
 				}}
 			>
 				<ScreenCopyControl showTip showTitle={false} />
@@ -325,7 +327,7 @@ function VideoPlayer({ ...prop }) {
 				<ZoomControl showTip showTitle={false} />
 				<Button icon={<Expand />} tip={t('全屏')} onClick={(e) => toggleFullScreen(setFullScreen)} />
 			</Box>
-			<Box style={{ position: 'absolute', right: 0, visibility }}>
+			<Box style={{ position: 'absolute', right: 0, ...visibility }}>
 				<Button icon={<FormClose />} tip={t('关闭')} />
 			</Box>
 		</Box>
