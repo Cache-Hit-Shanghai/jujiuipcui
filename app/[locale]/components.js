@@ -257,7 +257,7 @@ function getMessageFallback({ namespace, key, error }) {
 
 function IntlProvider({ children, ...props }) {
 	return (
-		<NextIntlClientProvider {...{ getMessageFallback }} {...props}>
+		<NextIntlClientProvider now={new Date()} timeZone='Asia/Shanghai' {...{ getMessageFallback }} {...props}>
 			{children}
 		</NextIntlClientProvider>
 	);
